@@ -41,36 +41,47 @@ define([
             $.each(columns, function (columnKey, columnValue) {
                 defaultDataItem[columnValue.field] = contrail.checkIfExist(columnValue.defaultValue) ? columnValue.defaultValue : null;
             });
-
-            columns.push({
-                id: 'icon-minus',
-                field: "",
-                name: '',
-                cssClass: '',
-                rerenderOnResize: false,
-                formatter: function (r, c, v, cd, dc) {
-                    return '<i class="row-remove icon-minus grey" data-row=' + r + '></i>'
-                },
-                width: 20,
-                maxWidth: 20,
-                resizable: false,
-                sortable: false
+            //TODO dirty fix added to avoid adding the plus and minus icon repeatedly on opening the modal multiple times
+            var iconMinusAdded = false;
+            var iconPlusAdded = false;
+            $.each(columns,function(i,d){
+                if(d.id == 'icon-minus')
+                    iconMinusAdded = true;
+                if(d.id == 'icon-plus')
+                    iconPlusAdded = true;
             });
-
-            columns.push({
-                id: 'icon-plus',
-                field: "",
-                name: '',
-                cssClass: '',
-                rerenderOnResize: false,
-                formatter: function (r, c, v, cd, dc) {
-                    return '<i class="row-add icon-plus grey" data-row=' + r + '></i>'
-                },
-                width: 20,
-                maxWidth: 20,
-                resizable: false,
-                sortable: false
-            });
+            if(!iconMinusAdded){
+                columns.push({
+                    id: 'icon-minus',
+                    field: "",
+                    name: '',
+                    cssClass: '',
+                    rerenderOnResize: false,
+                    formatter: function (r, c, v, cd, dc) {
+                        return '<i class="row-remove icon-minus grey" data-row=' + r + '></i>'
+                    },
+                    width: 20,
+                    maxWidth: 20,
+                    resizable: false,
+                    sortable: false
+                });
+            }
+            if(!iconPlusAdded){
+                columns.push({
+                    id: 'icon-plus',
+                    field: "",
+                    name: '',
+                    cssClass: '',
+                    rerenderOnResize: false,
+                    formatter: function (r, c, v, cd, dc) {
+                        return '<i class="row-add icon-plus grey" data-row=' + r + '></i>'
+                    },
+                    width: 20,
+                    maxWidth: 20,
+                    resizable: false,
+                    sortable: false
+                });
+            }
 
             options = $.extend(true, {}, defaultOptions, options);
 
@@ -78,25 +89,23 @@ define([
 
             grid.gotoCell(data.length, 0, true);
 
-            $('#' + elId).data('contrailDynamicGrid', {
+            $('#' + elId).data('contrailDynamicgrid', {
                 _grid: grid
             })
 
             grid.onAddNewRow.subscribe(function (e, args) {
-                if (contrail.checkIfExist($('#' + elId).data('contrailDynamicGrid'))) {
-                    var thisGrid = $('#' + elId).data('contrailDynamicGrid')._grid;
-                    if(contrail.checkIfExist(args.item[options.uniqueColumn]) && args.item[options.uniqueColumn] != '') {
-                        var item = $.extend(true, {}, defaultDataItem, args.item);
+                var thisGrid = $('#' + elId).data('contrailDynamicgrid')._grid;
+                if(contrail.checkIfExist(args.item[options.uniqueColumn]) && args.item[options.uniqueColumn] != '') {
+                    var item = $.extend(true, {}, defaultDataItem, args.item);
 
-                        thisGrid.invalidateRow(data.length);
-                        data.push(item);
-                        thisGrid.updateRowCount();
-                        thisGrid.render();
-                        thisGrid.gotoCell(data.length, 0, true);
-                    } else {
-                        thisGrid.invalidateRow(data.length);
-                        thisGrid.render();
-                    }
+                    thisGrid.invalidateRow(data.length);
+                    data.push(item);
+                    thisGrid.updateRowCount();
+                    thisGrid.render();
+//                    thisGrid.gotoCell(data.length, 0, true);
+                } else {
+                    thisGrid.invalidateRow(data.length);
+                    thisGrid.render();
                 }
             });
 
@@ -111,29 +120,25 @@ define([
             $('#' + elId)
                 .off('click', 'i.row-add')
                 .on('click', 'i.row-add', function() {
-                    if (contrail.checkIfExist($('#' + elId).data('contrailDynamicGrid'))) {
-                        var rowIndex = $(this).data('row'),
-                            thisGrid = $('#' + elId).data('contrailDynamicGrid')._grid;
+                    var rowIndex = $(this).data('row'),
+                        thisGrid = $('#' + elId).data('contrailDynamicgrid')._grid;
 
-                        data.splice((rowIndex + 1), 0, $.extend(true, {}, defaultDataItem));
-                        thisGrid.setData(data);
-                        thisGrid.gotoCell((rowIndex + 1), 0, true);
-                    }
+                    data.splice((rowIndex + 1), 0, $.extend(true, {}, defaultDataItem));
+                    thisGrid.setData(data);
+                    thisGrid.gotoCell((rowIndex + 1), 0, true);
                 });
 
             $('#' + elId)
                 .off('click', 'i.row-remove')
                 .on('click', 'i.row-remove', function() {
-                    if (contrail.checkIfExist($('#' + elId).data('contrailDynamicGrid'))) {
-                        var rowIndex = $(this).data('row'),
-                            thisGrid = $('#' + elId).data('contrailDynamicGrid')._grid;
+                    var rowIndex = $(this).data('row'),
+                        thisGrid = $('#' + elId).data('contrailDynamicgrid')._grid;
 
-                        data.splice(rowIndex, 1);
-                        thisGrid.setData(data);
+                    data.splice(rowIndex, 1);
+                    thisGrid.setData(data);
 
-                        if (contrail.checkIfFunction(options.events.onUpdate)) {
-                            options.events.onUpdate();
-                        }
+                    if (contrail.checkIfFunction(options.events.onUpdate)) {
+                        options.events.onUpdate();
                     }
                 });
 

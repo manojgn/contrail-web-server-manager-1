@@ -11,7 +11,9 @@ define([
         this.PACKAGE_PREFIX_ID = 'package';
         this.CLUSTER_PREFIX_ID = 'cluster';
         this.SERVER_PREFIX_ID = 'server';
+        this.BAREMETAL_PREFIX_ID = 'baremetal';
         this.SM_PREFIX_ID = 'sm';
+        this.BM_PREFIX_ID = 'bm';
 
         this.TMPL_SUFFIX_ID = "-template";
         this.RESULTS_SUFFIX_ID = "-results";
@@ -74,12 +76,23 @@ define([
         this.URL_OBJ_SERVER_ID = '/sm/objects/server?id=';
         this.URL_SERVER_REIMAGE = '/sm/server/reimage';
         this.URL_OBJ_IMAGE_ID = '/sm/objects/image?id=';
-
+        this.URL_BAREMETAL_SERVER = '/api/tenants/config/baremetal-details';
+        this.URL_BAREMETAL_ADD = '/api/tenants/config/baremetal';
+        this.URL_NETWORKS = '/api/admin/config/get-data?type=virtual-network';
+        this.URL_PHYSICAL_INTERFACES = '/api/tenants/config/physical-interfaces/';
+        this.URL_PHYSICAL_INTERFACE = '/api/tenants/config/physical-interface/';
+        this.URL_DELETE_PORT = '/api/tenants/config/delete-port/';
+        this.URL_CREATE_PORT = '/api/tenants/config/create-port';
+        this.URL_PORTS = '/api/tenants/config/ports';
+        this.URL_VM = '/api/tenants/config/li-virtual-machine';
+        this.URL_PHYSICAL_ROUTERS_LIST = '/api/tenants/config/physical-routers-list';
+        this.URL_MAP_VIRTUAL_MACHINE_REFS = '/api/tenants/config/map-virtual-machine-refs/';
         this.CACHED_TAG_COLORS = {};
 
         this.URL_HASH_SM_CLUSTERS = 'setting_sm_clusters';
         this.URL_HASH_SM_SERVERS = 'setting_sm_servers';
-
+        this.URL_HASH_BM_SERVERS = 'config_pd_baremetal';
+        
         this.KEY_MODEL_ERRORS = 'errors';
         this.KEY_MODEL_LOCKS = 'locks';
         this.KEY_ELEMENT_ID = 'elementId';
@@ -106,6 +119,7 @@ define([
         this.TMPL_SECTION_VIEW = "sm-section-view-template";
         this.TMPL_EDIT_FORM = "sm-edit-form-template";
         this.TMPL_2ROW_GROUP_DETAIL = "sm-grid-2-row-group-detail-template";
+        this.TMPL_BAREMETAL_PAGE_DETAIL = "baremetal-detail-page-template";
         this.TMPL_DETAIL_PAGE = "sm-detail-page-template";
         this.TMPL_DETAIL_PAGE_ACTION = "sm-detail-page-action-template";
         this.TMPL_DELETE_IMAGE = "sm-delete-image-template";
@@ -113,6 +127,71 @@ define([
 
         this.IMAGE_TYPES = ['ubuntu', 'centos', 'redhat', 'esxi5.1', 'esxi5.5'];
         this.PACKAGE_TYPES = ['contrail-ubuntu-package', 'contrail-centos-package', 'contrail-storage-ubuntu-package'];
+        
+        this.TMPL_BM_EDIT_FORM = "bm-edit-form-template";
+      //TODO IMPORTANT REMOVE THIS BEFORE CHECKIN
+                this.DUMMY_DATA = [ {
+                    "domain" : "contrail.juniper.net",
+                    "ipmi_type" : null,
+                    "ipmi_username" : "ADMIN",
+                    "discovered" : "false",
+                    "tag" : {},
+                    "cluster_id" : "",
+                    "id" : "test2",
+                    "gateway" : "4.4.4.4",
+                    "network" : {
+                        "management_interface" : "eth0",
+                        "interfaces" : [ {
+                            "member_interfaces" : [],
+                            "name" : "eth0",
+                            "default_gateway" : "4.4.4.4",
+                            "ip_address" : "2.2.1.4",
+                            "mac_address" : "0a:cf:e9:49:c8:36",
+                            "dhcp" : null,
+                            "type" : "physical",
+                            "tor" : "pr1",
+                            "tor_port" : "ge-2/2/2"
+                        }, {
+                            "member_interfaces" : [],
+                            "name" : "eth1",
+                            "default_gateway" : "4.4.4.4",
+                            "ip_address" : "3.3.3.3",
+                            "mac_address" : "0a:cf:e9:49:c8:32",
+                            "dhcp" : null,
+                            "type" : "physical",
+                            "tor" : "pr1",//physical router
+                            "tor_port" : "ge-1/1/1"//physical interface
+                        } ]
+                    },
+                    "parameters" : {
+                        "interface_name" : "eth0",
+                        "partition" : ""
+                    },
+                    "last_update" : null,
+                    "mac_address" : "0A:CF:E9:49:C8:31",
+                    "provisioned_id" : null,
+                    "email" : null,
+                    "status" : "server_added",
+                    "reimaged_id" : null,
+                    "package_image_id" : "",
+                    "static_ip" : "N",
+                    "intf_bond" : null,
+                    "subnet_mask" : "255.255.255.255",
+                    "base_image_id" : "",
+                    "ipmi_password" : "ADMIN",
+                    "intf_control" : null,
+                    "password" : null,
+                    "ip_address" : "2.2.2.2",
+                    "intf_data" : null,
+                    "roles" : null,
+                    "contrail" : {
+                        "control_data_interface" : "eth1"
+                    },
+                    "ipmi_address" : null,
+                    "host_name" : "test2",
+                    "cgrid" : "id_1",
+                    "cgrchecked" : false
+                } ];
     }
     return Constants;
 });
