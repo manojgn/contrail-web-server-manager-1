@@ -61,7 +61,6 @@ define([
                         sortable: {
                             defaultSortCols: {
                                 'discovered': {sortAsc: false},
-                                'tag': {sortAsc: true},
                                 'status': {sortAsc: true}
                             }
                         }
