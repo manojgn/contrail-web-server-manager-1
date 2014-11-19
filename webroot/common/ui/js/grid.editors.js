@@ -165,6 +165,10 @@
                 $dropdown.select();
 
                 $contrailDropdown = $dropdown.data('contrailDropdown');
+
+                if (contrail.checkIfFunction(args.column.initSetData)) {
+                    args.column.initSetData(args, $contrailDropdown);
+                }
             }
         };
 
