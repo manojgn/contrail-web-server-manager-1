@@ -69,7 +69,15 @@ define([
                 'intf_control': null,
                 'parameters': {},
                 'tag': {},
-                'roles': ['compute']
+                'roles': ['compute'],
+                'contrail': {
+                    'control_data_interface': null
+                },
+                'network': {
+                    'management_interface': null,
+                    'provisioning': "kickstart",
+                    'interfaces': []
+                }
             };
         };
 

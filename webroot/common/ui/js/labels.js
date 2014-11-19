@@ -68,6 +68,8 @@ define([
             "compute_non_mgmt_gway": "Compute Non-Management Gateway",
             "static_ip": "Static IP",
             "host_name": "Host Name",
+            "management_interface": "Management Interface",
+            "control_data_interface": "Control Data Interface",
 
             //Tags
             "reservedby": "Reserved By",
@@ -126,6 +128,11 @@ define([
         this.TITLE_OPENSTACK = "Openstack";
         this.TITLE_SYSTEM_MANAGEMENT = "System Management";
         this.TITLE_INTERFACES = "Interfaces";
+        this.TITLE_PHYSICAL_INTERFACES = "Physical Interfaces";
+        this.TITLE_BOND_INTERFACES = "Bond Interfaces";
+        this.TITLE_SUB_INTERFACES = "Sub Interfaces";
+        this.TITLE_MANAGEMENT_INTERFACES = "Management Interfaces";
+        this.TITLE_ROUTE_CONFIGRATIONS = "Route Configurations";
         this.TITLE_TAGS = "Tags";
         this.TITLE_CONFIGURATIONS = "Configurations";
         this.TITLE_SERVER_STATUS = "Server Status";
@@ -184,6 +191,8 @@ define([
         this.TITLE_FILTER_SERVERS = 'Filter Servers';
         this.TITLE_SELECT_SERVERS = 'Select Servers';
         this.TITLE_SELECTED_SERVERS = 'Selected Servers';
+        this.TITLE_SELECT_MANAGEMENT_INTERFACE = 'Select Management Interface';
+        this.TITLE_SELECT_CONTROL_DATA_INTERFACE = 'Select Control Data Interface';
 
         this.TITLE_SAVE_NEXT = 'Save &amp; Next';
         this.TITLE_NEXT = 'Next';

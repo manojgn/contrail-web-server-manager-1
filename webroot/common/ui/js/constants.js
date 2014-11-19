@@ -41,6 +41,18 @@ define([
             {'id': 'disable', 'text': 'Disable'}
 
         ];
+
+        this.INTERFACE_TYPES = [
+            {
+                text: 'physical',
+                value: 'physical'
+            },
+            {
+                text: 'bond',
+                value: 'bond'
+            }
+        ];
+
         this.FLAGS = [
             {'id': 'False', 'text': 'False'},
             {'id': 'True', 'text': 'True'}
