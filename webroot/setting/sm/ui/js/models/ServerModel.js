@@ -15,6 +15,7 @@ define([
                 var ajaxConfig = {};
                 var putData = {}, serverAttrsEdited = [], serversEdited = [],
                     serverAttrs = this.model().attributes,
+                    originalAttrs = this.model()._originalAttributes,
                     locks = this.model().attributes.locks.attributes,
                     that = this;
 
@@ -24,7 +25,9 @@ define([
                 }
 
                 putData[smwc.SERVER_PREFIX_ID] = serversEdited;
-                smwu.removeRolesFromServers(putData);
+                if(originalAttrs['cluster_id'] != serverAttrsEdited['cluster_id']) {
+                    smwu.removeRolesFromServers(putData);
+                }
 
                 ajaxConfig.type = "PUT";
                 ajaxConfig.data = JSON.stringify(putData);
@@ -89,12 +92,14 @@ define([
         createServers: function (callbackObj, ajaxMethod) {
             if (this.model().isValid(true, smwc.KEY_CONFIGURE_VALIDATION)) {
                 var ajaxConfig = {};
-                var putData = {}, serversCreated = [], that = this,
+                var putData = {}, serverAttrsEdited = [], serversCreated = [],
                     serverAttrs = this.model().attributes,
                     locks = this.model().attributes.locks.attributes,
                     that = this;
 
-                serversCreated.push(smwu.getEditConfigObj(serverAttrs, locks));
+                serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
+                serversCreated.push(serverAttrsEdited);
+
                 putData[smwc.SERVER_PREFIX_ID] = serversCreated;
 
                 ajaxConfig.type = contrail.checkIfExist(ajaxMethod) ? ajaxMethod : "PUT";
@@ -230,6 +235,7 @@ define([
                 putData = servers;
                 ajaxConfig.type = "POST";
                 ajaxConfig.data = JSON.stringify(putData);
+                ajaxConfig.timeout = smwc.TIMEOUT;
                 ajaxConfig.url = smwc.URL_SERVER_REIMAGE;
                 console.log(ajaxConfig);
                 contrail.ajaxHandler(ajaxConfig, function () {
@@ -267,6 +273,7 @@ define([
 
                 ajaxConfig.type = "POST";
                 ajaxConfig.data = JSON.stringify(putData);
+                ajaxConfig.timeout = smwc.TIMEOUT;
                 ajaxConfig.url = smwc.URL_SERVER_PROVISION;
                 console.log(ajaxConfig);
                 contrail.ajaxHandler(ajaxConfig, function () {
@@ -316,20 +323,12 @@ define([
                 'base_image_id': {
                     required: true,
                     msg: smwm.getRequiredMessage('base_image_id')
-                },
-                'network.management_interface': {
-                    required: true,
-                    msg: smwm.getRequiredMessage('management_interface')
                 }
             },
             provisionValidation: {
                 'package_image_id': {
                     required: true,
                     msg: smwm.getRequiredMessage('package_image_id')
-                },
-                'contrail.control_data_interface': {
-                    required: true,
-                    msg: smwm.getRequiredMessage('control_data_interface')
                 }
             },
             configureValidation: {
@@ -346,7 +345,7 @@ define([
                     msg: smwm.getRequiredMessage('control_data_interface')
                 },
                 'ipmi_address': {
-                    required: false,
+                    required: true,
                     pattern: smwc.PATTERN_IP_ADDRESS,
                     msg: smwm.getInvalidErrorMessage('ipmi_address')
                 },

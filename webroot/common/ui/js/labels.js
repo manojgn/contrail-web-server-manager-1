@@ -99,6 +99,8 @@ define([
             "new_servers": "New Servers",
             "registered_servers": "Registered Servers",
             "configured_servers": "Configured Servers",
+            "inreimage_servers": "In-Reimage Servers",
+            "reimaged_servers": "Reimaged Servers",
             "inprovision_servers": "In-Provision Servers",
             "provisioned_servers": "Provisioned Servers",
             "total_servers": "Total Servers",
@@ -165,6 +167,7 @@ define([
 
         this.SENSORS_INFO = 'Sensors Information';
         this.SELECT_CLUSTER = 'Select Cluster';
+        this.SELECT_TYPE = 'Select Type';
         this.TITLE_ADD_CLUSTER = 'Add Cluster';
         this.TITLE_DEL_CLUSTER = 'Delete Cluster';
         this.TITLE_DEL_CLUSTERS = 'Delete Clusters';

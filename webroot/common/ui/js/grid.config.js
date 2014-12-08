@@ -26,12 +26,12 @@ define([
         ];
 
         this.CLUSTER_COLUMNS = [
-            { id: "cluster_id", field: "id", name: "Name", width: 120, minWidth: 15, cssClass: 'cell-hyperlink-blue', events: {
+            { id: "cluster_id", field: "id", name: "Name", width: 150, minWidth: 15, cssClass: 'cell-hyperlink-blue', events: {
                 onClick: function (e, dc) {
                     loadFeature({p: 'setting_sm_clusters', q: {'cluster_id': dc['id']}});
                 }
             }},
-            { id: "email", field: "email", name: "Email", width: 120, minWidth: 15 },
+            { id: "email", field: "email", name: "Email", width: 150, minWidth: 15 },
             { id: "new-servers", field: "", name: "New Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
                 formatter: function (r, c, v, cd, dc) {
                     var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
@@ -44,6 +44,20 @@ define([
                     var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
                         serverStatus = uiParams['servers_status'];
                     return serverStatus['configured_servers'];
+                }
+            },
+            { id: "inreimage_servers", field: "", name: "In-Reimage Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
+                formatter: function (r, c, v, cd, dc) {
+                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                        serverStatus = uiParams['servers_status'];
+                    return serverStatus['inreimage_servers'];
+                }
+            },
+            { id: "reimaged_servers", field: "", name: "Reimaged Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
+                formatter: function (r, c, v, cd, dc) {
+                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                        serverStatus = uiParams['servers_status'];
+                    return serverStatus['reimaged_servers'];
                 }
             },
             { id: "inprovision_servers", field: "", name: "In-Provision Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
@@ -190,6 +204,7 @@ define([
 
         this.EDIT_SERVERS_ROLES_COLUMNS = ([
             { id: "server_id", field: "id", name: "Hostname", width: 75, minWidth: 75 },
+            { id: "ip_address", field: "ip_address", name: "IP", width: 80, minWidth: 80 },
             {
                 id: "tag", field: "tag", name: "Tags", width: 125, minWidth: 125,
                 formatter: function (r, c, v, cd, dc) {
@@ -224,7 +239,7 @@ define([
                 ],
                 commonColumnsSet2 = [
                     {
-                        id: "tag", field: "tag", name: "Tags", width: 150, minWidth: 150,
+                        id: "tag", field: "tag", name: "Tags", width: 150, minWidth: 150, sortable: false,
                         formatter: function (r, c, v, cd, dc) {
                             var tagTemplate = contrail.getTemplate4Id("sm-tags-template"),
                                 tagHTML = tagTemplate({tags: dc.tag, colors: smwc.CACHED_TAG_COLORS, allowLink: true});
