@@ -12,7 +12,7 @@ require.config({
         'text': 'assets/requirejs/text',
         'knockout': 'assets/knockout/knockout-3.0.0',
         'knockback': 'assets/backbone/knockback.min',
-        'validation': 'assets/backbone/backbone-validation-amd',
+        'validation': 'common/ui/js/backbone-validation-amd',
         'constants': 'common/ui/js/constants',
         'grid-config': 'common/ui/js/grid.config',
         'utils': 'common/ui/js/utils',

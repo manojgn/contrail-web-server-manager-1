@@ -269,3 +269,49 @@
         </a>
     </li>
 </script>
+
+<script type="text/x-handlebars-template" id="sm-editable-grid-view-template">
+    <table>
+        <thead>
+            <tr>
+                {{#each columns}}
+                    <th class="pull-left {{this.class}}">{{this.name}}</th>
+                {{/each}}
+            </tr>
+        </thead>
+        <tbody data-bind='foreach: interfaces'>
+             <tr>
+                {{#each columns}}
+                    <td id="{{elementId}}"></td>
+                {{/each}}
+                {{#each rowActions}}
+                    <td class=""><a href='#' data-bind='click: {{this.onClick}}'><i class="{{this.iconClass}}"></i></a></td>
+                {{/each}}
+             </tr>
+             <tr>
+                 {{#each columns}}
+                    <td><span class="help-block red" data-bind="visible: model().attributes.errors().{{elementId}}_error, text: model().attributes.errors().{{elementId}}_error"></span></td>
+                 {{/each}}
+             </tr>
+        </tbody>
+    </table>
+    {{#each gridActions}}
+        <button data-bind='click: {{this.onClick}}'>{{this.buttonTitle}}</button>
+    {{/each}}
+</script>
+
+<script type="text/x-handlebars-template" id="sm-grid-input-view-template">
+    <input type="{{type}}" name="{{name}}" class="{{class}}" data-bind="value: {{dataBindValue}}, event: { focusout: function() { validateAttr()('{{path}}', '{{validation}}', $data)} }"  />
+</script>
+
+<script type="text/x-handlebars-template" id="sm-grid-checkbox-view-template">
+    <input type="{{type}}" name="{{name}}" class="{{class}}" data-bind="checked: {{dataBindValue}}"/>
+</script>
+
+<script type="text/x-handlebars-template" id="sm-grid-dropdown-view-template">
+    <input name="{{name}}" class="{{class}}" data-bind="value: {{dataBindValue}}, contrailDropdown: {{printJSON elementConfig}}"/>
+</script>
+
+<script type="text/x-handlebars-template" id="sm-grid-multiselect-view-template">
+    <input name="{{name}}" class="{{class}}" data-bind="value: {{dataBindValue}}, contrailMultiselect: {{printJSON elementConfig}}"/>
+</script>

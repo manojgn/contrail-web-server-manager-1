@@ -44,7 +44,7 @@ define([
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this);
+            smwv.bind(this, {collection: this.model.model().attributes.interfaces});
         },
 
         renderConfigure: function (options) {
@@ -80,7 +80,7 @@ define([
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this);
+            smwv.bind(this, {collection: this.model.model().attributes.interfaces});
         },
 
         renderConfigureServers: function (options) {
@@ -318,7 +318,7 @@ define([
     function getConfigureViewConfig(disableId) {
         return {
             elementId: prefixId,
-                view: "AccordianView",
+            view: "AccordianView",
             viewConfig: [
             {
                 elementId: smwu.formatElementId([prefixId, smwl.TITLE_SYSTEM_MANAGEMENT]),
@@ -393,6 +393,38 @@ define([
                                     elementId: 'package_image_id',
                                     view: "FormDropdownView",
                                     viewConfig: {path: 'package_image_id', dataBindValue: 'package_image_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInPackages')}}}
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                elementId: smwu.formatElementId([prefixId, smwl.TITLE_PHYSICAL_INTERFACES]),
+                title: smwl.TITLE_PHYSICAL_INTERFACES,
+                view: "SectionView",
+                viewConfig: {
+                    rows: [
+                        {
+                            columns: [
+                                {
+                                    elementId: 'interfaces',
+                                    view: "FormEditableGridView",
+                                    viewConfig: {
+                                        path: 'interfaces',
+                                        columns: [
+                                            {elementId: 'name', name: 'Name', view: "GridInputView", class: "span3", viewConfig: {path: "name", dataBindValue: "name()"}},
+                                            {elementId: 'type', name: 'Type', view: "GridDropdownView", class: "span3", viewConfig: {path: 'type', dataBindValue: 'type()', elementConfig: {placeholder: smwl.SELECT_TYPE, dataTextField: "text", dataValueField: "id", data: smwc.INTERFACE_TYPES}}},
+                                            {elementId: 'members', name: 'Members', view: "GridMultiselectView", class: "span3", viewConfig: {path: 'members', dataBindValue: 'members()', elementConfig: {placeholder: smwl.SELECT_MEMBERS, data: []}}},
+                                            {elementId: 'dhcp', name: 'DHCP', view: "GridCheckboxView", class: "span1", viewConfig: {path: "dhcp", dataBindValue: "dhcp()"}}
+                                        ],
+                                        rowActions: [
+                                            {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-remove-sign icon-large'}
+                                        ],
+                                        gridActions: [
+                                            {onClick: "function() { addInterface('phyinterface'); }", buttonTitle: "Add"}
+                                        ]
+                                    }
                                 }
                             ]
                         }

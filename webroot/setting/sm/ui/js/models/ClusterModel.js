@@ -4,10 +4,8 @@
 
 define([
     'underscore',
-    'knockback',
-    'knockout',
     'common/ui/js/models/ContrailModel'
-], function (_, Knockback, Knockout, ContrailModel) {
+], function (_, ContrailModel) {
 
     var getValidationByKey = function (key) {
         var configureValidation = {

@@ -128,6 +128,9 @@ define([
         this.TITLE_OPENSTACK = "Openstack";
         this.TITLE_SYSTEM_MANAGEMENT = "System Management";
         this.TITLE_INTERFACES = "Interfaces";
+        this.TITLE_PHYSICAL_INTERFACES = "Physical Interfaces";
+        this.TITLE_BOND_INTERFACES = "Bond Interfaces";
+        this.TITLE_SUB_INTERFACES = "Sub Interfaces";
         this.TITLE_TAGS = "Tags";
         this.TITLE_CONFIGURATIONS = "Configurations";
         this.TITLE_SERVER_STATUS = "Server Status";
@@ -195,7 +198,8 @@ define([
         this.TITLE_DELETE_IMAGE = 'Delete Image';
         this.SELECT_PACKAGE = 'Select Package';
         this.TITLE_DELETE_PACKAGE = 'Delete Package';
-        this.SELECT_ROLES = 'Select Roles';
+        this.SELECT_ROLES = 'Select Roles'
+        this.SELECT_MEMBERS = 'Select Members';
         this.SEARCH_ROLES = 'Search Roles';
         this.FILTER_TAGS = 'Filter Tags';
         this.SEARCH_TAGS = 'Search Tags';

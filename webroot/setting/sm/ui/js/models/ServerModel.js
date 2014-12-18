@@ -4,11 +4,41 @@
 
 define([
     'underscore',
-    'common/ui/js/models/ContrailModel'
-], function (_, ContrailModel) {
+    'backbone',
+    'common/ui/js/models/ContrailModel',
+    'setting/sm/ui/js/models/InterfacesModel',
+], function (_, Backbone, ContrailModel, InterfaceModel) {
     var ServerModel = ContrailModel.extend({
 
         defaultConfig: smwmc.getServerModel(),
+
+        formatModelConfig: function (modelConfig) {
+            var interfaces = modelConfig['interfaces'],
+                interfaceModels = [], interfaceModel,
+                interfaceCollectionModel;
+
+            for(var i = 0; i < interfaces.length; i++) {
+                interfaceModel = new InterfaceModel(interfaces[i]);
+                interfaceModels.push(interfaceModel)
+            }
+
+            interfaceCollectionModel = new Backbone.Collection(interfaceModels);
+            modelConfig['interfaces'] = interfaceCollectionModel;
+            return modelConfig;
+        },
+
+        getServerInterfaces: function (serverAttributes) {
+            var interfaceCollection = serverAttributes.interfaces.toJSON(),
+                interfaceArray = [], interfaceAttributes;
+
+            for(var i = 0; i < interfaceCollection.length; i++) {
+                interfaceAttributes = interfaceCollection[i].model().attributes;
+                delete interfaceAttributes.errors;
+                delete interfaceAttributes.locks;
+                interfaceArray.push(interfaceCollection[i].model().attributes);
+            }
+            return interfaceArray;
+        },
 
         configure: function (checkedRows, callbackObj) {
             if (this.model().isValid(true, smwc.KEY_CONFIGURE_VALIDATION)) {
@@ -17,9 +47,12 @@ define([
                     serverAttrs = this.model().attributes,
                     originalAttrs = this.model()._originalAttributes,
                     locks = this.model().attributes.locks.attributes,
-                    that = this;
+                    interfaces;
 
+                interfaces = this.getServerInterfaces(serverAttrs);
                 serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
+                serverAttrsEdited['interfaces'] = interfaces;
+
                 for (var i = 0; i < checkedRows.length; i++) {
                     serversEdited.push(serverAttrsEdited);
                 }
@@ -29,9 +62,9 @@ define([
                     smwu.removeRolesFromServers(putData);
                 }
 
-                ajaxConfig.type = "PUT";
-                ajaxConfig.data = JSON.stringify(putData);
-                ajaxConfig.url = smwu.getObjectUrl(smwc.SERVER_PREFIX_ID);
+                 ajaxConfig.type = "PUT";
+                 ajaxConfig.data = JSON.stringify(putData);
+                 ajaxConfig.url = smwu.getObjectUrl(smwc.SERVER_PREFIX_ID);
                 console.log(ajaxConfig);
                 contrail.ajaxHandler(ajaxConfig, function () {
                     if (contrail.checkIfFunction(callbackObj.init)) {
@@ -95,9 +128,12 @@ define([
                 var putData = {}, serverAttrsEdited = [], serversCreated = [],
                     serverAttrs = this.model().attributes,
                     locks = this.model().attributes.locks.attributes,
-                    that = this;
+                    interfaces;
 
+                interfaces = this.getServerInterfaces(serverAttrs);
                 serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
+                serverAttrsEdited['interfaces'] = interfaces;
+
                 serversCreated.push(serverAttrsEdited);
 
                 putData[smwc.SERVER_PREFIX_ID] = serversCreated;
@@ -315,6 +351,18 @@ define([
                     callbackObj.error(error);
                 }
             });
+        },
+        addInterface: function(type) {
+            var interfaces = this.model().attributes['interfaces'],
+                newInterface = new InterfaceModel({name: "", type: type, "ip_address" : "", "mac_address" : "", "default_gateway" : "", "dhcp" : true, members: [], "tor" : "", "tor_port" : ""});
+
+            interfaces.add([newInterface]);
+        },
+        deleteInterface: function(index, data) {
+            var interfaceCollection = data.model().collection,
+                intf = data.model().collection.models[index()];
+
+            interfaceCollection.remove(intf);
         },
         validations: {
             reimageValidation: {

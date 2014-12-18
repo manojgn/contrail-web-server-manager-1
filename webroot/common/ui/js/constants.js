@@ -45,6 +45,13 @@ define([
             {'id': 'False', 'text': 'False'},
             {'id': 'True', 'text': 'True'}
         ];
+
+        this.INTERFACE_TYPES = [
+            {'id': 'phyinterface', 'text': 'Physical Interface'},
+            {'id': 'subinterface', 'text': 'Sub Interface'},
+            {'id': 'bondinterface', 'text': 'Bond Interface'}
+        ];
+
         this.PATTERN_IP_ADDRESS  = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
         this.PATTERN_SUBNET_MASK = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(\d|[1-2]\d|3[0-2]))?$/;
         this.PATTERN_MAC_ADDRESS = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
@@ -89,8 +96,14 @@ define([
 
         this.TMPL_ACCORDIAN_VIEW = "sm-accordian-view-template";
         this.TMPL_DROPDOWN_VIEW = "sm-dropdown-view-template";
+        this.TMPL_GRID_DROPDOWN_VIEW = "sm-grid-dropdown-view-template";
         this.TMPL_INPUT_VIEW = "sm-input-view-template";
+        this.TMPL_GRID_INPUT_VIEW = "sm-grid-input-view-template";
+        this.TMPL_CHECKBOX_VIEW = "sm-checkbox-view-template";
+        this.TMPL_GRID_CHECKBOX_VIEW = "sm-grid-checkbox-view-template";
+        this.TMPL_EDITABLE_GRID_VIEW = "sm-editable-grid-view-template";
         this.TMPL_MULTISELECT_VIEW = "sm-multiselect-view-template";
+        this.TMPL_GRID_MULTISELECT_VIEW = "sm-grid-multiselect-view-template";
         this.TMPL_SECTION_VIEW = "sm-section-view-template";
         this.TMPL_EDIT_FORM = "sm-edit-form-template";
         this.TMPL_2ROW_GROUP_DETAIL = "sm-grid-2-row-group-detail-template";

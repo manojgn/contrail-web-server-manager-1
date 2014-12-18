@@ -4,10 +4,8 @@
 
 define([
     'underscore',
-    'knockback',
-    'knockout',
     'common/ui/js/models/ContrailModel'
-], function (_, Knockback, Knockout, ContrailModel) {
+], function (_, ContrailModel) {
     var PackageModel = ContrailModel.extend({
 
         defaultConfig: smwmc.getImageModel(smwc.CATEGORY_PACKAGE),
@@ -17,8 +15,7 @@ define([
             if (this.model().isValid(true, smwc.KEY_CONFIGURE_VALIDATION)) {
                 var imageAttrs = this.model().attributes,
                     putData = {}, packageAttrsEdited = [],
-                    locks = this.model().attributes.locks.attributes,
-                    that = this;
+                    locks = this.model().attributes.locks.attributes;
 
                 locks['category' + smwc.LOCKED_SUFFIX_ID] = false;
                 packageAttrsEdited.push(smwu.getEditConfigObj(imageAttrs, locks));

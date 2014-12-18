@@ -11,8 +11,13 @@ define([
     'common/ui/js/views/FormCheckboxView',
     'common/ui/js/views/AccordianView',
     'common/ui/js/views/SectionView',
-    'common/ui/js/views/WizardView'
-], function (_, FormInputView, FormGridView, FormMultiselectView, FormDropdownView, FormCheckboxView, AccordianView, SectionView, WizardView) {
+    'common/ui/js/views/WizardView',
+    'common/ui/js/views/FormEditableGridView',
+    'common/ui/js/views/GridInputView',
+    'common/ui/js/views/GridCheckboxView',
+    'common/ui/js/views/GridDropdownView',
+    'common/ui/js/views/GridMultiselectView'
+], function (_, FormInputView, FormGridView, FormMultiselectView, FormDropdownView, FormCheckboxView, AccordianView, SectionView, WizardView, FormEditableGridView, GridInputView, GridCheckboxView, GridDropdownView, GridMultiselectView) {
     var Utils = function () {
         var self = this;
         this.renderGrid = function (elementId, gridConfig) {
@@ -324,6 +329,30 @@ define([
                     elementView.render();
                     break;
 
+                case "FormEditableGridView":
+                    elementView = new FormEditableGridView({el: parentElement, model: model, attributes: viewAttributes});
+                    elementView.render();
+                    break;
+
+                case "GridInputView":
+                    elementView = new GridInputView({el: parentElement, model: model, attributes: viewAttributes});
+                    elementView.render();
+                    break;
+
+                case "GridCheckboxView":
+                    elementView = new GridCheckboxView({el: parentElement, model: model, attributes: viewAttributes});
+                    elementView.render();
+                    break;
+
+                case "GridDropdownView":
+                    elementView = new GridDropdownView({el: parentElement, model: model, attributes: viewAttributes});
+                    elementView.render();
+                    break;
+
+                case "GridMultiselectView":
+                    elementView = new GridMultiselectView({el: parentElement, model: model, attributes: viewAttributes});
+                    elementView.render();
+                    break;
             }
         };
 
@@ -335,6 +364,14 @@ define([
                 server['roles'] = [];
             }
         }
+
+        this.getAttributeFromPath = function (attributePath) {
+            var attributePathArray = attributePath.split('.'),
+                attribute = attributePathArray[attributePathArray.length - 1];
+
+            return attribute;
+        };
+
     };
     return Utils;
 });

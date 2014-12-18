@@ -67,9 +67,24 @@ define([
                 'intf_data': null,
                 'intf_bond': null,
                 'intf_control': null,
+                'interfaces' : [],
                 'parameters': {},
                 'tag': {},
                 'roles': ['compute']
+            };
+        };
+
+        this.getInterfaceModel = function () {
+            return {
+                'name': null,
+                'type': null,
+                "ip_address" : null,
+                "mac_address" : null,
+                "default_gateway" : null,
+                "dhcp" : null,
+                "members": [],
+                "tor" : null,
+                "tor_port" : null
             };
         };
 
