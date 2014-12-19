@@ -279,7 +279,7 @@
                 {{/each}}
             </tr>
         </thead>
-        <tbody data-bind='foreach: interfaces'>
+        <tbody data-bind="foreach: {{collection}}">
              <tr>
                 {{#each columns}}
                     <td id="{{elementId}}"></td>

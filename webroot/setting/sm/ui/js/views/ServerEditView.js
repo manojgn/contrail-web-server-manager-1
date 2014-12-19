@@ -411,7 +411,8 @@ define([
                                     elementId: 'interfaces',
                                     view: "FormEditableGridView",
                                     viewConfig: {
-                                        path: 'interfaces',
+                                        path: "interfaces",
+                                        collection: "filterInterfaces('phyinterface')",
                                         columns: [
                                             {elementId: 'name', name: 'Name', view: "GridInputView", class: "span3", viewConfig: {path: "name", dataBindValue: "name()"}},
                                             {elementId: 'type', name: 'Type', view: "GridDropdownView", class: "span3", viewConfig: {path: 'type', dataBindValue: 'type()', elementConfig: {placeholder: smwl.SELECT_TYPE, dataTextField: "text", dataValueField: "id", data: smwc.INTERFACE_TYPES}}},

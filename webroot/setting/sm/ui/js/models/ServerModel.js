@@ -5,9 +5,10 @@
 define([
     'underscore',
     'backbone',
+    'knockout',
     'common/ui/js/models/ContrailModel',
     'setting/sm/ui/js/models/InterfacesModel',
-], function (_, Backbone, ContrailModel, InterfaceModel) {
+], function (_, Backbone, Knockout, ContrailModel, InterfaceModel) {
     var ServerModel = ContrailModel.extend({
 
         defaultConfig: smwmc.getServerModel(),
@@ -363,6 +364,23 @@ define([
                 intf = data.model().collection.models[index()];
 
             interfaceCollection.remove(intf);
+        },
+        filterInterfaces: function(interfaceType) {
+            return Knockout.computed(function () {
+                var kbInterfaces = this.interfaces(),
+                    interfaces = this.model().attributes.interfaces,
+                    phyInterfaces = [], model, type;
+
+                for (var i = 0; i < interfaces.length; i++) {
+                    model = interfaces.at(i);
+                    type = model.attributes.type();
+
+                    if (type == interfaceType) {
+                        phyInterfaces.push(kbInterfaces[i]);
+                    }
+                }
+                return phyInterfaces;
+            }, this);
         },
         validations: {
             reimageValidation: {

@@ -29,7 +29,7 @@ define([
                     msg: smwm.getRequiredMessage('name')
                 }
             }
-        },
+        }
     });
 
     return InterfacesModel;
