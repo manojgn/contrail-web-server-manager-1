@@ -44,7 +44,7 @@ define([
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this, {collection: this.model.model().attributes.interfaces});
+            smwv.bind(this);
         },
 
         renderConfigure: function (options) {
@@ -146,7 +146,7 @@ define([
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this);
+            smwv.bind(this, {collection: this.model.model().attributes.interfaces});;
         },
 
         renderProvisionServers: function (options) {
