@@ -70,6 +70,10 @@ define([
                 'interfaces' : [],
                 'parameters': {},
                 'tag': {},
+                'network': {
+                    'management_interface': null,
+                    'interfaces': []
+                },
                 'roles': ['compute']
             };
         };
