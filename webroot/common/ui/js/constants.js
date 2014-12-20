@@ -47,9 +47,9 @@ define([
         ];
 
         this.INTERFACE_TYPES = [
-            {'id': 'phyinterface', 'text': 'Physical Interface'},
+            {'id': 'physical', 'text': 'Physical Interface'},
             {'id': 'subinterface', 'text': 'Sub Interface'},
-            {'id': 'bondinterface', 'text': 'Bond Interface'}
+            {'id': 'bond', 'text': 'Bond Interface'}
         ];
 
         this.PATTERN_IP_ADDRESS  = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;

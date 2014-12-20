@@ -412,7 +412,7 @@ define([
                                     view: "FormEditableGridView",
                                     viewConfig: {
                                         path: "interfaces",
-                                        collection: "filterInterfaces('phyinterface')",
+                                        collection: "filterInterfaces('physical')",
                                         columns: [
                                             {elementId: 'name', name: 'Name', view: "GridInputView", class: "span3", viewConfig: {path: "name", dataBindValue: "name()"}},
                                             {elementId: 'type', name: 'Type', view: "GridDropdownView", class: "span3", viewConfig: {path: 'type', dataBindValue: 'type()', elementConfig: {placeholder: smwl.SELECT_TYPE, dataTextField: "text", dataValueField: "id", data: smwc.INTERFACE_TYPES}}},
@@ -423,7 +423,7 @@ define([
                                             {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-remove-sign icon-large'}
                                         ],
                                         gridActions: [
-                                            {onClick: "function() { addInterface('phyinterface'); }", buttonTitle: "Add"}
+                                            {onClick: "function() { addInterface('physical'); }", buttonTitle: "Add"}
                                         ]
                                     }
                                 }

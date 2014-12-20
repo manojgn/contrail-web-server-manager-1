@@ -14,7 +14,7 @@ define([
         defaultConfig: smwmc.getServerModel(),
 
         formatModelConfig: function (modelConfig) {
-            var interfaces = modelConfig['interfaces'],
+            var interfaces = modelConfig['network']['interfaces'],
                 interfaceModels = [], interfaceModel,
                 interfaceCollectionModel;
 
@@ -25,6 +25,7 @@ define([
 
             interfaceCollectionModel = new Backbone.Collection(interfaceModels);
             modelConfig['interfaces'] = interfaceCollectionModel;
+            delete modelConfig['network']['interfaces'];
             return modelConfig;
         },
 
@@ -52,7 +53,7 @@ define([
 
                 interfaces = this.getServerInterfaces(serverAttrs);
                 serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
-                serverAttrsEdited['interfaces'] = interfaces;
+                serverAttrsEdited['network']['interfaces'] = interfaces;
 
                 for (var i = 0; i < checkedRows.length; i++) {
                     serversEdited.push(serverAttrsEdited);
@@ -133,7 +134,7 @@ define([
 
                 interfaces = this.getServerInterfaces(serverAttrs);
                 serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
-                serverAttrsEdited['interfaces'] = interfaces;
+                serverAttrsEdited['network']['interfaces'] = interfaces;
 
                 serversCreated.push(serverAttrsEdited);
 
