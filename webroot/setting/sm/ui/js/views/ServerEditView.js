@@ -366,6 +366,105 @@ define([
                 }
             },
             {
+                elementId: smwu.formatElementId([prefixId, smwl.TITLE_PHYSICAL_INTERFACES]),
+                title: smwl.TITLE_PHYSICAL_INTERFACES,
+                view: "SectionView",
+                viewConfig: {
+                    rows: [
+                        {
+                            columns: [
+                                {
+                                    elementId: 'interfaces',
+                                    view: "FormEditableGridView",
+                                    viewConfig: {
+                                        path: "interfaces",
+                                        validation: 'physicalValidation',
+                                        collection: "filterInterfaces('physical')",
+                                        columns: [
+                                            {elementId: 'name', name: 'Name', view: "GridInputView", class: "span3", viewConfig: {path: "name", dataBindValue: "name()"}},
+                                            {elementId: 'type', name: 'Type', view: "GridDropdownView", class: "span3", viewConfig: {path: 'type', dataBindValue: 'type()', elementConfig: {placeholder: smwl.SELECT_TYPE, dataTextField: "text", dataValueField: "id", data: smwc.INTERFACE_TYPES}}},
+                                            {elementId: 'members', name: 'Members', view: "GridMultiselectView", class: "span3", viewConfig: {path: 'members', dataBindValue: 'members()', elementConfig: {placeholder: smwl.SELECT_MEMBERS, data: []}}},
+                                            {elementId: 'dhcp', name: 'DHCP', view: "GridCheckboxView", class: "span1", viewConfig: {path: "dhcp", dataBindValue: "dhcp()"}}
+                                        ],
+                                        rowActions: [
+                                            {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-remove-sign icon-large'}
+                                        ],
+                                        gridActions: [
+                                            {onClick: "function() { addInterface('physical'); }", buttonTitle: "Add"}
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                elementId: smwu.formatElementId([prefixId, smwl.TITLE_BOND_INTERFACES]),
+                title: smwl.TITLE_BOND_INTERFACES,
+                view: "SectionView",
+                viewConfig: {
+                    rows: [
+                        {
+                            columns: [
+                                {
+                                    elementId: 'interfaces',
+                                    view: "FormEditableGridView",
+                                    viewConfig: {
+                                        path: "interfaces",
+                                        validation: 'bondValidation',
+                                        collection: "filterInterfaces('bond')",
+                                        columns: [
+                                            {elementId: 'name', name: 'Name', view: "GridInputView", class: "span3", viewConfig: {path: "name", dataBindValue: "name()"}},
+                                            {elementId: 'members', name: 'Members', view: "GridMultiselectView", class: "span3", viewConfig: {path: 'members', dataBindValue: 'members()', elementConfig: {placeholder: smwl.SELECT_MEMBERS, data: []}}},
+                                            {elementId: 'dhcp', name: 'DHCP', view: "GridCheckboxView", class: "span1", viewConfig: {path: "dhcp", dataBindValue: "dhcp()"}}
+                                        ],
+                                        rowActions: [
+                                            {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-remove-sign icon-large'}
+                                        ],
+                                        gridActions: [
+                                            {onClick: "function() { addInterface('bond'); }", buttonTitle: "Add"}
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                elementId: smwu.formatElementId([prefixId, smwl.TITLE_SUB_INTERFACES]),
+                title: smwl.TITLE_SUB_INTERFACES,
+                view: "SectionView",
+                viewConfig: {
+                    rows: [
+                        {
+                            columns: [
+                                {
+                                    elementId: 'interfaces',
+                                    view: "FormEditableGridView",
+                                    viewConfig: {
+                                        path: "interfaces",
+                                        validation: 'subinterfaceValidation',
+                                        collection: "filterInterfaces('subinterface')",
+                                        columns: [
+                                            {elementId: 'name', name: 'Name', view: "GridInputView", class: "span3", viewConfig: {path: "name", dataBindValue: "name()"}},
+                                            {elementId: 'dhcp', name: 'DHCP', view: "GridCheckboxView", class: "span1", viewConfig: {path: "dhcp", dataBindValue: "dhcp()"}}
+                                        ],
+                                        rowActions: [
+                                            {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-remove-sign icon-large'}
+                                        ],
+                                        gridActions: [
+                                            {onClick: "function() { addInterface('subinterface'); }", buttonTitle: "Add"}
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
                 elementId: smwu.formatElementId([prefixId, smwl.TITLE_PROVISIONING]),
                 title: smwl.TITLE_PROVISIONING,
                 view: "SectionView",
@@ -398,40 +497,8 @@ define([
                         }
                     ]
                 }
-            },
-            {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_PHYSICAL_INTERFACES]),
-                title: smwl.TITLE_PHYSICAL_INTERFACES,
-                view: "SectionView",
-                viewConfig: {
-                    rows: [
-                        {
-                            columns: [
-                                {
-                                    elementId: 'interfaces',
-                                    view: "FormEditableGridView",
-                                    viewConfig: {
-                                        path: "interfaces",
-                                        collection: "filterInterfaces('physical')",
-                                        columns: [
-                                            {elementId: 'name', name: 'Name', view: "GridInputView", class: "span3", viewConfig: {path: "name", dataBindValue: "name()"}},
-                                            {elementId: 'type', name: 'Type', view: "GridDropdownView", class: "span3", viewConfig: {path: 'type', dataBindValue: 'type()', elementConfig: {placeholder: smwl.SELECT_TYPE, dataTextField: "text", dataValueField: "id", data: smwc.INTERFACE_TYPES}}},
-                                            {elementId: 'members', name: 'Members', view: "GridMultiselectView", class: "span3", viewConfig: {path: 'members', dataBindValue: 'members()', elementConfig: {placeholder: smwl.SELECT_MEMBERS, data: []}}},
-                                            {elementId: 'dhcp', name: 'DHCP', view: "GridCheckboxView", class: "span1", viewConfig: {path: "dhcp", dataBindValue: "dhcp()"}}
-                                        ],
-                                        rowActions: [
-                                            {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-remove-sign icon-large'}
-                                        ],
-                                        gridActions: [
-                                            {onClick: "function() { addInterface('physical'); }", buttonTitle: "Add"}
-                                        ]
-                                    }
-                                }
-                            ]
-                        }
-                    ]
-                }
-            },
+            }
+            /*
             {
                 elementId: smwu.formatElementId([prefixId, smwl.TITLE_INTERFACES]),
                 title: smwl.TITLE_INTERFACES,
@@ -453,6 +520,7 @@ define([
                     ]
                 }
             }
+            */
         ]
         };
 

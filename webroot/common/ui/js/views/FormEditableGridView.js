@@ -13,7 +13,7 @@ define([
                 columns = viewConfig.columns,
                 path = viewConfig[smwc.KEY_PATH],
                 model = this.model,
-                validation = this.attributes.validation,
+                validation = (viewConfig['validation'] != null) ? viewConfig['validation'] : this.attributes.validation,
                 childViewObj, childElId;
 
             model.initLockAttr(path, false);

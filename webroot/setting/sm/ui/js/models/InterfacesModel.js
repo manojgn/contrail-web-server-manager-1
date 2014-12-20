@@ -23,7 +23,19 @@ define([
         },
 
         validations: {
-            configureValidation: {
+            physicalValidation: {
+                'name': {
+                    required: true,
+                    msg: smwm.getRequiredMessage('name')
+                }
+            },
+            bondValidation: {
+                'name': {
+                    required: true,
+                    msg: smwm.getRequiredMessage('name')
+                }
+            },
+            subinterfaceValidation: {
                 'name': {
                     required: true,
                     msg: smwm.getRequiredMessage('name')
