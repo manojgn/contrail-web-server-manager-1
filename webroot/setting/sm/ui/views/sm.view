@@ -271,32 +271,34 @@
 </script>
 
 <script type="text/x-handlebars-template" id="sm-editable-grid-view-template">
-    <table>
+    <table class="contrail-editable-grid-table">
         <thead>
             <tr>
                 {{#each columns}}
-                    <th class="pull-left {{this.class}}">{{this.name}}</th>
+                    <th class="{{this.class}}" data-bind="style: {width: '{{width}}px' }">{{this.name}}</th>
                 {{/each}}
             </tr>
         </thead>
         <tbody data-bind="foreach: {{collection}}">
-             <tr>
+             <tr class="data-row">
                 {{#each columns}}
-                    <td id="{{elementId}}"></td>
+                    <td id="{{elementId}}" class="data-cell"></td>
                 {{/each}}
                 {{#each rowActions}}
-                    <td class=""><a href='#' data-bind='click: {{this.onClick}}'><i class="{{this.iconClass}}"></i></a></td>
+                    <td class="action-cell"><a href='#' data-bind='click: {{this.onClick}}'><i class="{{this.iconClass}}"></i></a></td>
                 {{/each}}
              </tr>
-             <tr>
+             <tr class="error-row">
                  {{#each columns}}
-                    <td><span class="help-block red" data-bind="visible: model().attributes.errors().{{elementId}}_error, text: model().attributes.errors().{{elementId}}_error"></span></td>
+                    <td class="error-cell"><span class="help-block red" data-bind="visible: model().attributes.errors().{{elementId}}_error, text: model().attributes.errors().{{elementId}}_error"></span></td>
                  {{/each}}
              </tr>
         </tbody>
     </table>
     {{#each gridActions}}
-        <button data-bind='click: {{this.onClick}}'>{{this.buttonTitle}}</button>
+        <div class="row-fluid margin-10-0-0">
+            <a class="editable-grid-add-link" data-bind='click: {{this.onClick}}'><i class="icon-plus"></i> &nbsp;{{this.buttonTitle}}</a>
+        </div>
     {{/each}}
 </script>
 
@@ -305,13 +307,13 @@
 </script>
 
 <script type="text/x-handlebars-template" id="sm-grid-checkbox-view-template">
-    <input type="{{type}}" name="{{name}}" class="{{class}}" data-bind="checked: {{dataBindValue}}"/>
+    <input type="{{type}}" name="{{name}}" class="{{class}} ace-input" data-bind="checked: {{dataBindValue}}"/> <span class="ace-lbl" />
 </script>
 
 <script type="text/x-handlebars-template" id="sm-grid-dropdown-view-template">
-    <input name="{{name}}" class="{{class}}" data-bind="value: {{dataBindValue}}, contrailDropdown: {{printJSON elementConfig}}"/>
+    <input tupe="text" name="{{name}}" class="{{class}}" data-bind="style: {width: '{{width}}px' }, value: {{dataBindValue}}, contrailDropdown: {{printJSON elementConfig}}, style: {width: '{{width}}px' }"/>
 </script>
 
 <script type="text/x-handlebars-template" id="sm-grid-multiselect-view-template">
-    <input name="{{name}}" class="{{class}}" data-bind="value: {{dataBindValue}}, contrailMultiselect: {{printJSON elementConfig}}"/>
+    <input type="text" name="{{name}}" class="{{class}}" data-bind="style: {width: '{{width}}px' }, value: {{dataBindValue}}, contrailMultiselect: {{printJSON elementConfig}}"/>
 </script>

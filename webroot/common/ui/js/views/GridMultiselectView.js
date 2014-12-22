@@ -15,7 +15,8 @@ define([
                 path = viewConfig[smwc.KEY_PATH],
                 tmplParameters;
 
-            tmplParameters = { id: elId, name: elId, dataBindValue: viewConfig[smwc.KEY_DATABIND_VALUE], class: "span12", elementConfig: elementConfig };
+            tmplParameters = { id: elId, name: elId, dataBindValue: viewConfig[smwc.KEY_DATABIND_VALUE], class: "span12",
+                                elementConfig: elementConfig, width: contrail.checkIfExist(viewConfig.width) ? viewConfig.width : 200 };
 
             this.$el.html(msTemplate(tmplParameters));
         }

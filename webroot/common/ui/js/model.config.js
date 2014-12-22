@@ -88,7 +88,8 @@ define([
                 "dhcp" : null,
                 "members": [],
                 "tor" : null,
-                "tor_port" : null
+                "tor_port" : null,
+                parent: []
             };
         };
 

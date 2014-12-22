@@ -27,6 +27,21 @@ define([
                 'name': {
                     required: true,
                     msg: smwm.getRequiredMessage('name')
+                },
+                'ip_address': {
+                    required: true,
+                    pattern: smwc.PATTERN_IP_ADDRESS,
+                    msg: smwm.getShortInvalidErrorMessage('ip_address')
+                },
+                'mac_address': {
+                    required: true,
+                    pattern: smwc.PATTERN_MAC_ADDRESS,
+                    msg: smwm.getShortInvalidErrorMessage('mac_address')
+                },
+                'default_gateway': {
+                    required: true,
+                    pattern: smwc.PATTERN_IP_ADDRESS,
+                    msg: smwm.getShortInvalidErrorMessage('gateway')
                 }
             },
             bondValidation: {

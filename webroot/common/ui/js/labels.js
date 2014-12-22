@@ -200,6 +200,7 @@ define([
         this.TITLE_DELETE_PACKAGE = 'Delete Package';
         this.SELECT_ROLES = 'Select Roles'
         this.SELECT_MEMBERS = 'Select Members';
+        this.SELECT_PARENT_INTERFACE = 'Select Parent Interface';
         this.SEARCH_ROLES = 'Search Roles';
         this.FILTER_TAGS = 'Filter Tags';
         this.SEARCH_TAGS = 'Search Tags';
