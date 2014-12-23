@@ -76,12 +76,25 @@ define([
                 'network': {
                     'management_interface': null,
                     'provisioning': "kickstart",
-                    'interfaces': []
+                    'interfaces': [],
+                    'tor':null,
+                    'tor_port':null
                 }
             };
         };
 
         this.getImageModel = function (category) {
+            return {
+                'id': null,
+                'category': category,
+                'type': null,
+                'version': null,
+                'path': null,
+                'parameters': {}
+            };
+        };
+        
+        this.getBaremetalModel = function (category) {
             return {
                 'id': null,
                 'category': category,

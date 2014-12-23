@@ -55,6 +55,7 @@ define([
             "ipmi_username": "IPMI Username",
             "ipmi_password": "IPMI Password",
             "base_image_id": "Default Image",
+            'baremetal_edit_vn' : 'Virtual Network',
             "reimaged_id": "Installed Image",
             "package_image_id": "Default Package",
             "provisioned_id": "Installed Package",
@@ -164,6 +165,7 @@ define([
         this.TITLE_IMAGE = 'Image';
         this.TITLE_PACKAGES = 'Packages';
         this.TITLE_PACKAGE = 'Package';
+        this.TITLE_BAREMETAL_SERVERS = 'Baremetal Servers';
 
         this.SENSORS_INFO = 'Sensors Information';
         this.SELECT_CLUSTER = 'Select Cluster';
@@ -193,9 +195,31 @@ define([
         this.TITLE_SEARCH_SERVERS = 'Search Servers';
         this.TITLE_FILTER_SERVERS = 'Filter Servers';
         this.TITLE_SELECT_SERVERS = 'Select Servers';
+        this.TITLE_SELECT_SERVER = 'Select Server';
         this.TITLE_SELECTED_SERVERS = 'Selected Servers';
         this.TITLE_SELECT_MANAGEMENT_INTERFACE = 'Select Management Interface';
         this.TITLE_SELECT_CONTROL_DATA_INTERFACE = 'Select Control Data Interface';
+        this.TITLE_SERVER_DETAIL = 'Details';
+        this.TITLE_CONFIGURE_INTERFACES = 'Configure Interfaces';
+        this.TITLE_SELECT_MANAGEMENT_INTERFACE = 'Select Management Interface';
+        this.TITLE_SELECT_CONTROL_DATA_INTERFACE = 'Select Control Data Interface';
+        this.TITLE_SERVER_DETAIL = 'Details';
+        this.TITLE_CONFIGURE_INTERFACES = 'Configure Interfaces';
+        this.TITLE_SELECT_MANAGEMENT_INTERFACE = 'Select Management Interface';
+        this.TITLE_SELECT_CONTROL_DATA_INTERFACE = 'Select Control Data Interface';
+        this.TITLE_SERVER_DETAIL = 'Details';
+        this.TITLE_CONFIGURE_INTERFACES = 'Configure Interfaces';
+        
+        this.TITLE_BAREMETAL_SERVERS = 'Baremetal Servers';
+        this.TITLE_BAREMETAL_SERVER = 'Baremetal Server';
+        this.TITLE_ADD_BAREMETAL_SERVER = 'Add Baremetal Servers';
+        this.TITLE_EDIT_BAREMETAL_SERVER = 'Edit Baremetal Server';
+        this.TITLE_EDIT_BAREMETAL_VN = 'Edit VN';
+        this.TITLE_SELECT_BAREMETAL_SERVER = 'Select Baremetal Server';
+        this.TITLE_SELECT_INTERFACE = 'Select Interface';
+        this.TITLE_BAREMETAL_INTERFACES = 'Baremetal Interfaces';
+        this.TITLE_SELECT_IMAGE = 'Select Image';
+        this.TITLE_FILTER_BAREMETALS = 'Filtered Baremetal Servers'; 
 
         this.TITLE_SAVE_NEXT = 'Save &amp; Next';
         this.TITLE_NEXT = 'Next';
@@ -208,6 +232,8 @@ define([
         this.SEARCH_ROLES = 'Search Roles';
         this.FILTER_TAGS = 'Filter Tags';
         this.SEARCH_TAGS = 'Search Tags';
+        this.SELECT_NETWORK = 'Select Network';
+        this.SELECT_INTERFACE = 'Select Interface';
     };
     return Labels;
 });
