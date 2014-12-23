@@ -623,9 +623,13 @@ define([
 
                                                 setTimeout(function(){
                                                     $('#management_interface_dropdown').data('contrailDropdown').setData(managementInterfaces);
-                                                    $('#management_interface_dropdown').data('contrailDropdown').value(managementInterfaceValue)
+                                                    $('#management_interface_dropdown').data('contrailDropdown').value(managementInterfaceValue);
+                                                    serverModel.attributes.network.management_interface = managementInterfaceValue
+
                                                     $('#control_data_interface_dropdown').data('contrailDropdown').setData(controlDataInterfaces);
-                                                    $('#control_data_interface_dropdown').data('contrailDropdown').value(controlDataInterfaceValue)
+                                                    $('#control_data_interface_dropdown').data('contrailDropdown').value(controlDataInterfaceValue);
+                                                    serverModel.attributes.contrail.control_data_interface = controlDataInterfaceValue;
+
                                                 }, 1000);
                                             }
                                         }
