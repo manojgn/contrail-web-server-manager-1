@@ -59,6 +59,7 @@ define([
                     },
                     success: function () {
                         options['callback']();
+                        $('#server-interfaces-grid').data('contrailDynamicgrid')._grid.destroy();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
@@ -69,6 +70,7 @@ define([
                 });
             }, 'onCancel': function () {
                 Knockback.release(that.model, document.getElementById(modalId));
+                $('#server-interfaces-grid').data('contrailDynamicgrid')._grid.destroy();
                 smwv.unbind(that);
                 $("#" + modalId).modal('hide');
             }});
@@ -128,6 +130,7 @@ define([
                     },
                     success: function () {
                         options['callback']();
+                        $('#server-interfaces-grid').data('contrailDynamicgrid')._grid.destroy();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
@@ -138,6 +141,7 @@ define([
                 }, "POST");
             }, 'onCancel': function () {
                 Knockback.release(that.model, document.getElementById(modalId));
+                $('#server-interfaces-grid').data('contrailDynamicgrid')._grid.destroy();
                 smwv.unbind(that);
                 $("#" + modalId).modal('hide');
             }});
