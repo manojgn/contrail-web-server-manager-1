@@ -360,9 +360,9 @@ define([
 
             interfaces.add([newInterface]);
         },
-        deleteInterface: function(index, data) {
+        deleteInterface: function(data, kbInterface) {
             var interfaceCollection = data.model().collection,
-                intf = data.model().collection.models[index()];
+                intf = kbInterface.model();
 
             interfaceCollection.remove(intf);
         },
@@ -381,6 +381,36 @@ define([
                     }
                 }
                 return phyInterfaces;
+            }, this);
+        },
+        getMemberInterfaces: function() {
+            return Knockout.computed(function () {
+                var kbInterfaces = this.interfaces(),
+                    interfaces = this.model().attributes.interfaces,
+                    memberInterfaces = [], model, dhcp;
+                for (var i = 0; i < interfaces.length; i++) {
+                    model = interfaces.at(i);
+                    dhcp = model.attributes.dhcp();
+                    if (dhcp == false && model.attributes.name() != "") {
+                        memberInterfaces.push(model.attributes.name());
+                    }
+                }
+                return memberInterfaces;
+            }, this);
+        },
+        getParentInterfaces: function() {
+            return Knockout.computed(function () {
+                var kbInterfaces = this.interfaces(),
+                    interfaces = this.model().attributes.interfaces,
+                    parentInterfaces = [], model, type;
+                for (var i = 0; i < interfaces.length; i++) {
+                    model = interfaces.at(i);
+                    type = model.attributes.type();
+                    if ((type == 'physical' || type == 'bond') && model.attributes.name() != "") {
+                        parentInterfaces.push(model.attributes.name());
+                    }
+                }
+                return parentInterfaces;
             }, this);
         },
         validations: {

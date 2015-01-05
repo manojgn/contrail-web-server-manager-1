@@ -311,9 +311,9 @@
 </script>
 
 <script type="text/x-handlebars-template" id="sm-grid-dropdown-view-template">
-    <input tupe="text" name="{{name}}" class="{{class}}" data-bind="style: {width: '{{width}}px' }, value: {{dataBindValue}}, contrailDropdown: {{printJSON elementConfig}}, style: {width: '{{width}}px' }"/>
+    <select name="{{name}}" class="{{class}}" data-bind="style: {width: '{{width}}px' }, options: {{elementConfig.data}}, selectedOptions: {{dataBindValue}}, select2: { placeholder: '{{elementConfig.placeholder}}' }"></select>
 </script>
 
 <script type="text/x-handlebars-template" id="sm-grid-multiselect-view-template">
-    <input type="text" name="{{name}}" class="{{class}}" data-bind="style: {width: '{{width}}px' }, value: {{dataBindValue}}, contrailMultiselect: {{printJSON elementConfig}}"/>
+    <select multiple name="{{name}}" class="{{class}}" data-bind="style: {width: '{{width}}px' }, options: {{elementConfig.data}}, selectedOptions: {{dataBindValue}}, select2: { placeholder: '{{elementConfig.placeholder}}' }"></select>
 </script>

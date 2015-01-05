@@ -390,7 +390,7 @@ define([
                                             {elementId: 'tor_port', name: 'TOR Port', view: "GridInputView", class: "", width: 70, viewConfig: {path: "tor_port", dataBindValue: "tor_port()"}}
                                         ],
                                         rowActions: [
-                                            {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-minus'}
+                                            {onClick: "function() { $root.deleteInterface($data, this); }", iconClass: 'icon-minus'}
                                         ],
                                         gridActions: [
                                             {onClick: "function() { addInterface('physical'); }", buttonTitle: "Add"}
@@ -421,11 +421,10 @@ define([
                                             {elementId: 'name', name: 'Name', view: "GridInputView", class: "", width: 200, viewConfig: {path: "name", dataBindValue: "name()"}},
                                             {elementId: 'ip_address', name: 'IP/Mask', view: "GridInputView", class: "", width: 155, viewConfig: {path: "ip_address", dataBindValue: "ip_address()"}},
                                             {elementId: 'dhcp', name: 'DHCP', view: "GridCheckboxView", class: "", width: 50, viewConfig: {path: "dhcp", dataBindValue: "dhcp()"}},
-                                            {elementId: 'members', name: 'Members', view: "GridMultiselectView", class: "", width: 300, viewConfig: {path: 'members', dataBindValue: 'members()', width: 300,
-                                                elementConfig: {placeholder: smwl.SELECT_MEMBERS, data: []}}}
+                                            {elementId: 'members', name: 'Members', view: "GridMultiselectView", class: "", width: 300, viewConfig: {path: 'members', dataBindValue: 'members()', width: 300, elementConfig: {placeholder: smwl.SELECT_MEMBERS, data: '$root.getMemberInterfaces()'}}}
                                         ],
                                         rowActions: [
-                                            {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-minus'}
+                                            {onClick: "function() { $root.deleteInterface($data, this); }", iconClass: 'icon-minus'}
                                         ],
                                         gridActions: [
                                             {onClick: "function() { addInterface('bond'); }", buttonTitle: "Add"}
@@ -454,15 +453,12 @@ define([
                                         collection: "filterInterfaces('subinterface')",
                                         columns: [
                                             {elementId: 'name', name: 'Name', view: "GridInputView", class: "", width: 200, viewConfig: {path: "name", dataBindValue: "name()"}},
-                                            {elementId: 'ip_address', name: 'IP/MAsk', view: "GridInputView", class: "", width: 155, viewConfig: {path: "ip_address", dataBindValue: "ip_address()"}},
+                                            {elementId: 'ip_address', name: 'IP/Mask', view: "GridInputView", class: "", width: 155, viewConfig: {path: "ip_address", dataBindValue: "ip_address()"}},
                                             {elementId: 'dhcp', name: 'DHCP', view: "GridCheckboxView", class: "", width:50, viewConfig: {path: "dhcp", dataBindValue: "dhcp()"}},
-                                            {elementId: 'parent', name: 'Parent Interface', view: "GridDropdownView", class: "", width: 200,
-                                                viewConfig: {path: 'parent', dataBindValue: 'parent()', width: 200,
-                                                    elementConfig: {placeholder: smwl.SELECT_PARENT_INTERFACE, dataTextField: "text", dataValueField: "id", data: []}
-                                                }}
+                                            {elementId: 'parent', name: 'Parent Interface', view: "GridDropdownView", class: "", width: 200, viewConfig: {path: 'parent', dataBindValue: 'parent()', width: 200, elementConfig: {placeholder: smwl.SELECT_PARENT_INTERFACE, data: '$root.getParentInterfaces()'}}}
                                         ],
                                         rowActions: [
-                                            {onClick: 'function() { $root.deleteInterface($index, $data); }', iconClass: 'icon-minus'}
+                                            {onClick: "function() { $root.deleteInterface($data, this); }", iconClass: 'icon-minus'}
                                         ],
                                         gridActions: [
                                             {onClick: "function() { addInterface('subinterface'); }", buttonTitle: "Add"}
