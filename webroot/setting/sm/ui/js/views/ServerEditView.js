@@ -329,19 +329,13 @@ define([
                         {
                             columns: [
                                 {elementId: 'id', view: "FormInputView", viewConfig: {disabled: disableId, path: "id", dataBindValue: "id", class: "span6"}},
-                                {elementId: 'mac_address', view: "FormInputView", viewConfig: {path: 'mac_address', dataBindValue: 'mac_address', class: "span6"}}
+                                {elementId: 'password', view: "FormInputView", viewConfig: {path: 'password', type: 'password', dataBindValue: 'password', class: "span6"}}
                             ]
                         },
                         {
                             columns: [
                                 {elementId: 'host_name', view: "FormInputView", viewConfig: {path: "host_name", dataBindValue: "host_name", class: "span6"}},
                                 {elementId: 'domain', view: "FormInputView", viewConfig: {path: "domain", dataBindValue: "domain", class: "span6", view: "FormInputView"}}
-                            ]
-                        },
-                        {
-                            columns: [
-                                {elementId: 'ip_address', view: "FormInputView", viewConfig: {path: "ip_address", dataBindValue: "ip_address", class: "span6"}},
-                                {elementId: 'password', view: "FormInputView", viewConfig: {path: 'password', type: 'password', dataBindValue: 'password', class: "span6"}}
                             ]
                         },
                         {
@@ -354,12 +348,6 @@ define([
                             columns: [
                                 {elementId: 'ipmi_username', view: "FormInputView", viewConfig: {path: 'ipmi_username', dataBindValue: 'ipmi_username', class: "span6"}},
                                 {elementId: 'ipmi_password', view: "FormInputView", viewConfig: {path: 'ipmi_password', type: 'password', dataBindValue: 'ipmi_password', class: "span6"}}
-                            ]
-                        },
-                        {
-                            columns: [
-                                {elementId: 'gateway', view: "FormInputView", viewConfig: {path: "gateway", dataBindValue: "gateway", class: "span6"}},
-                                {elementId: 'subnet_mask', view: "FormInputView", viewConfig: {path: 'subnet_mask', dataBindValue: 'subnet_mask', class: "span6"}}
                             ]
                         }
                     ]
@@ -500,27 +488,80 @@ define([
                                     viewConfig: {path: 'package_image_id', dataBindValue: 'package_image_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInPackages')}}}
                                 }
                             ]
+                        },
+                        {
+                            columns: [
+                                {
+                                    elementId: 'control_data_interface',
+                                    view: "FormDropdownView",
+                                    viewConfig: {path: 'contrail.control_data_interface', dataBindValue: 'contrail().control_data_interface', class: "span6", elementConfig: {placeholder: smwl.TITLE_SELECT_CONTROL_DATA_INTERFACE, dataTextField: "id", dataValueField: "id", data: []}}
+                                }
+                            ]
                         }
                     ]
                 }
             }
             /*
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_INTERFACES]),
-                title: smwl.TITLE_INTERFACES,
+                elementId: smwu.formatElementId([prefixId, smwl.TITLE_ROUTE_CONFIGRATIONS]),
+                title: smwl.TITLE_ROUTE_CONFIGRATIONS,
                 view: "SectionView",
                 viewConfig: {
                     rows: [
                         {
                             columns: [
-                                {elementId: 'interface_name', view: "FormInputView", viewConfig: {path: 'parameters.interface_name', dataBindValue: 'parameters().interface_name', class: "span6"}},
-                                {elementId: 'intf_bond', view: "FormInputView", viewConfig: {path: 'intf_bond', dataBindValue: 'intf_bond', class: "span6"}}
-                            ]
-                        },
-                        {
-                            columns: [
-                                {elementId: 'intf_data', view: "FormInputView", viewConfig: {path: 'intf_data', dataBindValue: 'intf_data', class: "span6"}},
-                                {elementId: 'intf_control', view: "FormInputView", viewConfig: {path: 'intf_control', dataBindValue: 'intf_control', class: "span6"}}
+                                {
+                                    elementId: 'server-routes-grid',
+                                    view: "FormDynamicGridView",
+                                    viewConfig: {
+                                        path: 'id',
+                                        class: "span12",
+                                        modelAttributePath: 'routes',
+                                        elementConfig: {
+                                            options: {
+                                                uniqueColumn: 'network'
+                                            },
+                                            columns: [
+                                                {
+                                                    id: "network", name: "IP Address/Mask", field: "network", width: 310,
+                                                    editor: ContrailGrid.Editors.Text,
+                                                    formatter: ContrailGrid.Formatters.Text,
+                                                    validator: function (value) {
+                                                        var pattern = new RegExp(smwc.PATTERN_SUBNET_MASK),
+                                                            valid = pattern.test(value);
+
+                                                        return {
+                                                            valid: valid,
+                                                            message: (!valid) ? smwm.getInvalidErrorMessage('subnet_mask') : null
+                                                        }
+
+                                                    },
+                                                    elementConfig: {
+                                                        placeholder: 'IP Address/Mask'
+                                                    }
+                                                },
+                                                {
+                                                    id: "gateway", name: "Gateway", field: "gateway", width: 280,
+                                                    editor: ContrailGrid.Editors.Text,
+                                                    formatter: ContrailGrid.Formatters.Text,
+                                                    validator: function (value) {
+                                                        var pattern = new RegExp(smwc.PATTERN_IP_ADDRESS),
+                                                            valid = pattern.test(value);
+
+                                                        return {
+                                                            valid: valid,
+                                                            message: (!valid) ? smwm.getInvalidErrorMessage('subnet_mask') : null
+                                                        }
+
+                                                    },
+                                                    elementConfig: {
+                                                        placeholder: 'Gateway'
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
                             ]
                         }
                     ]
