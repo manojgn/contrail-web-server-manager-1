@@ -94,14 +94,20 @@ define([
             };
         };
         
+//        this.getBaremetalModel = function (category) {
+//            return {
+//                'id': null,
+//                'category': category,
+//                'type': null,
+//                'version': null,
+//                'path': null,
+//                'parameters': {}
+//            };
+//        };
         this.getBaremetalModel = function (category) {
             return {
-                'id': null,
-                'category': category,
-                'type': null,
-                'version': null,
-                'path': null,
-                'parameters': {}
+                'baremetal_reimage' : null,
+                'interfaces' : []
             };
         };
     };
