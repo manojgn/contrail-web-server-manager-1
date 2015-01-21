@@ -53,7 +53,9 @@ define([
                     }
                 }
             } else {
-                subnetUUID = nwIpamRefs[0]['subnet']['subnet_uuid'];
+                if(nwIpamRefs != null && nwIpamRefs.length > 0){
+                    subnetUUID = nwIpamRefs[0]['subnet']['subnet_uuid'];
+                }
             }
             var postObj = {
                     "virtual-machine-interface": {
