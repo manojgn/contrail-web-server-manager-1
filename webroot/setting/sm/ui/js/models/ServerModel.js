@@ -14,7 +14,7 @@ define([
         defaultConfig: smwmc.getServerModel(),
 
         formatModelConfig: function (modelConfig) {
-            var interfaces = modelConfig['network']['interfaces'],
+            var interfaces = (modelConfig['network'] != null) ? (modelConfig['network']['interfaces']) : [],
                 interfaceModels = [], interfaceModel,
                 interfaceCollectionModel;
 
@@ -25,7 +25,9 @@ define([
 
             interfaceCollectionModel = new Backbone.Collection(interfaceModels);
             modelConfig['interfaces'] = interfaceCollectionModel;
-            delete modelConfig['network']['interfaces'];
+            if(modelConfig['network'] != null) {
+                delete modelConfig['network']['interfaces'];
+            }
             return modelConfig;
         },
 

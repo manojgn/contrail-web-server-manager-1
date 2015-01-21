@@ -86,8 +86,8 @@ define([
 
         this.getInterfaceModel = function () {
             return {
-                'name': null,
-                'type': null,
+                "name": null,
+                "type": null,
                 "ip_address" : null,
                 "mac_address" : null,
                 "default_gateway" : null,
@@ -95,7 +95,7 @@ define([
                 "members": [],
                 "tor" : null,
                 "tor_port" : null,
-                parent: []
+                "parent": []
             };
         };
 

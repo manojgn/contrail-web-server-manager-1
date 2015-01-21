@@ -64,7 +64,7 @@ define([
             };
 
             cowu.renderGrid(gridElId, gridConfig);
-        },
+        }
     });
     var rowActionConfig = [
         smwgc.getConfigureAction(function (rowIndex) {

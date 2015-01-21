@@ -391,7 +391,7 @@ define([
                 }
             },
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_BOND_INTERFACES]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_BOND_INTERFACES]),
                 title: smwl.TITLE_BOND_INTERFACES,
                 view: "SectionView",
                 viewConfig: {
@@ -425,7 +425,7 @@ define([
                 }
             },
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_SUB_INTERFACES]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_SUB_INTERFACES]),
                 title: smwl.TITLE_SUB_INTERFACES,
                 view: "SectionView",
                 viewConfig: {
@@ -503,7 +503,7 @@ define([
             }
             /*
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_ROUTE_CONFIGRATIONS]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_ROUTE_CONFIGRATIONS]),
                 title: smwl.TITLE_ROUTE_CONFIGRATIONS,
                 view: "SectionView",
                 viewConfig: {
