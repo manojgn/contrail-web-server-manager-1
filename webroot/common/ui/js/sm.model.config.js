@@ -112,12 +112,9 @@ define([
         
         this.getBaremetalModel = function (category) {
             return {
-                'id': null,
-                'category': category,
-                'type': null,
-                'version': null,
-                'path': null,
-                'parameters': {}
+                'baremetal_reimage' : null,
+                'base_image_id' : null,
+                'interfaces' : []
             };
         };
     };
