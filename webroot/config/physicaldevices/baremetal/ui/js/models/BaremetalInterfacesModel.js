@@ -15,7 +15,7 @@ define([
 
         validateAttr: function (attributePath, validation, data) {
             var model = data.model().attributes.model(),
-                attr = smwu.getAttributeFromPath(attributePath),
+                attr = cowu.getAttributeFromPath(attributePath),
                 errors = model.get(smwc.KEY_MODEL_ERRORS),
                 attrErrorObj = {}, isValid;
 

@@ -81,7 +81,7 @@ define([
             that.model.getVN({
                 init : function() {
                     that.model.showErrorAttr(prefixId + smwc.TITLE_EDIT_CONFIG, false);
-                    //smwu.enableModalLoading(modalId);
+                    //cowu.enableModalLoading(modalId);
                 },
                 success: function(res) {
                     var formattedData = parseVns(res);
@@ -342,7 +342,7 @@ define([
                     ]*/
                     columns: [
                               {
-                                  elementId: smwu.formatElementId([prefixId, smwl.TITLE_SELECT_INTERFACE, smwl.TITLE_BAREMETAL_INTERFACES]),
+                                  elementId: cowu.formatElementId([prefixId, smwl.TITLE_SELECT_INTERFACE, smwl.TITLE_BAREMETAL_INTERFACES]),
                                   view: "FormEditableGridView",
                                   viewConfig: {
                                       path: "interfaces",
@@ -535,7 +535,7 @@ define([
                         interfaceMappings.push({'interface' : bmIntf, 'vn':vn});
                     }
                     
-//                    var interfaceMappings = $('#' + smwu.formatElementId([prefixId, smwl.TITLE_SELECT_INTERFACE , smwl.TITLE_BAREMETAL_INTERFACES]))
+//                    var interfaceMappings = $('#' + cowu.formatElementId([prefixId, smwl.TITLE_SELECT_INTERFACE , smwl.TITLE_BAREMETAL_INTERFACES]))
 //                                                .data('contrailDynamicgrid')._grid.getData();
                     var selectedServer = $('#' + cowu.formatElementId([prefixId, smwl.TITLE_SELECT_BAREMETAL_SERVER, smwl.TITLE_FILTER_BAREMETALS]))
                                                 .data('contrailGrid').getCheckedRows()[0];
