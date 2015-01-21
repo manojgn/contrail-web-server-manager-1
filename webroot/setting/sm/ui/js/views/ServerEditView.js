@@ -18,153 +18,153 @@ define([
             var editLayout = editTemplate({prefixId: prefixId}),
                 that = this;
 
-            smwu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
+            cowu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
                 that.model.reimage(options['checkedRows'], {
                     init: function () {
                         that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
-                        smwu.enableModalLoading(modalId);
+                        cowu.enableModalLoading(modalId);
                     },
                     success: function () {
                         options['callback']();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
-                        smwu.disableModalLoading(modalId, function () {
+                        cowu.disableModalLoading(modalId, function () {
                             that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, error.responseText);
                         });
                     }
                 }); // TODO: Release binding on successful configure
             }, 'onCancel': function () {
                 Knockback.release(that.model, document.getElementById(modalId));
-                smwv.unbind(that);
+                kbValidation.unbind(that);
                 $("#" + modalId).modal('hide');
             }});
 
-            smwu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, reimageViewConfig);
+            cowu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, reimageViewConfig);
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this);
+            kbValidation.bind(this);
         },
 
         renderConfigure: function (options) {
             var editLayout = editTemplate({prefixId: prefixId}),
                 disableId, modelAttr, that = this;
 
-            smwu.createModal({'modalId': modalId, 'className': 'modal-840', 'title': options['title'], 'body': editLayout, 'onSave': function () {
+            cowu.createModal({'modalId': modalId, 'className': 'modal-840', 'title': options['title'], 'body': editLayout, 'onSave': function () {
                 that.model.configure(options['checkedRows'], {
                     init: function () {
                         that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
-                        smwu.enableModalLoading(modalId);
+                        cowu.enableModalLoading(modalId);
                     },
                     success: function () {
                         options['callback']();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
-                        smwu.disableModalLoading(modalId, function () {
+                        cowu.disableModalLoading(modalId, function () {
                             that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, error.responseText);
                         });
                     }
                 });
             }, 'onCancel': function () {
                 Knockback.release(that.model, document.getElementById(modalId));
-                smwv.unbind(that);
+                kbValidation.unbind(that);
                 $("#" + modalId).modal('hide');
             }});
 
             modelAttr = this.model.model().get('id');
             disableId = (modelAttr == null || modelAttr == '') ? false : true;
 
-            smwu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, getConfigureViewConfig(disableId), "configureValidation");
+            cowu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, getConfigureViewConfig(disableId), "configureValidation");
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this, {collection: this.model.model().attributes.interfaces});
+            kbValidation.bind(this, {collection: this.model.model().attributes.interfaces});
         },
 
         renderConfigureServers: function (options) {
             var editLayout = editTemplate({prefixId: prefixId}),
                 that = this;
 
-            smwu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
+            cowu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
                 that.model.configureServers(options['checkedRows'], {
                     init: function () {
                         that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
-                        smwu.enableModalLoading(modalId);
+                        cowu.enableModalLoading(modalId);
                     },
                     success: function () {
                         options['callback']();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
-                        smwu.disableModalLoading(modalId, function () {
+                        cowu.disableModalLoading(modalId, function () {
                             that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, error.responseText);
                         });
                     }
                 });
             }, 'onCancel': function () {
                 Knockback.release(that.model, document.getElementById(modalId));
-                smwv.unbind(that);
+                kbValidation.unbind(that);
                 $("#" + modalId).modal('hide');
             }});
 
-            smwu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, configureServersViewConfig, "configureValidation", true);
+            cowu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, configureServersViewConfig, "configureValidation", true);
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this);
+            kbValidation.bind(this);
         },
 
         renderAddServer: function (options) {
             var editLayout = editTemplate({prefixId: prefixId}),
                 that = this;
 
-            smwu.createModal({'modalId': modalId, 'className': 'modal-840', 'title': options['title'], 'body': editLayout, 'onSave': function () {
+            cowu.createModal({'modalId': modalId, 'className': 'modal-840', 'title': options['title'], 'body': editLayout, 'onSave': function () {
                 that.model.createServers({
                     init: function () {
                         that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
-                        smwu.enableModalLoading(modalId);
+                        cowu.enableModalLoading(modalId);
                     },
                     success: function () {
                         options['callback']();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
-                        smwu.disableModalLoading(modalId, function () {
+                        cowu.disableModalLoading(modalId, function () {
                             that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, error.responseText);
                         });
                     }
                 }, "POST");
             }, 'onCancel': function () {
                 Knockback.release(that.model, document.getElementById(modalId));
-                smwv.unbind(that);
+                kbValidation.unbind(that);
                 $("#" + modalId).modal('hide');
             }});
 
-            smwu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, getConfigureViewConfig(false), "configureValidation");
+            cowu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, getConfigureViewConfig(false), "configureValidation");
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this, {collection: this.model.model().attributes.interfaces});;
+            kbValidation.bind(this, {collection: this.model.model().attributes.interfaces});;
         },
 
         renderProvisionServers: function (options) {
             var editLayout = editTemplate({prefixId: prefixId}),
                 that = this;
 
-            smwu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
+            cowu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
                 that.model.provision(options['checkedRows'], {
                     init: function () {
                         that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
-                        smwu.enableModalLoading(modalId);
+                        cowu.enableModalLoading(modalId);
                     },
                     success: function () {
                         options['callback']();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
-                        smwu.disableModalLoading(modalId, function () {
+                        cowu.disableModalLoading(modalId, function () {
                             that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, error.responseText);
                         });
                     }
@@ -172,15 +172,15 @@ define([
                 // TODO: Release binding on successful configure
             }, 'onCancel': function () {
                 Knockback.release(that.model, document.getElementById(modalId));
-                smwv.unbind(that);
+                kbValidation.unbind(that);
                 $("#" + modalId).modal('hide');
             }});
 
-            smwu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, provisionServersViewConfig);
+            cowu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, provisionServersViewConfig);
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this);
+            kbValidation.bind(this);
         },
 
         renderTagServers: function (options) {
@@ -197,30 +197,30 @@ define([
                     },
                     lockEditingByDefault = options.lockEditingByDefault;
 
-                smwu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
+                cowu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
                         that.model.editTags(options['checkedRows'], {
                             init: function () {
                                 that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
-                                smwu.enableModalLoading(modalId);
+                                cowu.enableModalLoading(modalId);
                             },
                             success: function () {
                                 options['callback']();
                                 $("#" + modalId).modal('hide');
                             },
                             error: function (error) {
-                                smwu.disableModalLoading(modalId, function () {
+                                cowu.disableModalLoading(modalId, function () {
                                     that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, error.responseText);
                                 });
                             }
                         }); // TODO: Release binding on successful configure
                     }, 'onCancel': function () {
                         Knockback.release(that.model, document.getElementById(modalId));
-                        smwv.unbind(that);
+                        kbValidation.unbind(that);
                         $("#" + modalId).modal('hide');
                     }
                 });
 
-                smwu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), that.model, editTagViewConfig, 'editTagsValidation', lockEditingByDefault);
+                cowu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), that.model, editTagViewConfig, 'editTagsValidation', lockEditingByDefault);
                 that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
                 Knockback.applyBindings(that.model, document.getElementById(modalId));
@@ -231,29 +231,29 @@ define([
             var editLayout = editTemplate({prefixId: prefixId}),
                 that = this;
 
-            smwu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
+            cowu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
                 that.model.editRoles(options['checkedRows'], {
                     init: function () {
                         that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
-                        smwu.enableModalLoading(modalId);
+                        cowu.enableModalLoading(modalId);
                     },
                     success: function () {
                         options['callback']();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
-                        smwu.disableModalLoading(modalId, function () {
+                        cowu.disableModalLoading(modalId, function () {
                             that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, error.responseText);
                         });
                     }
                 }); // TODO: Release binding on successful configure
             }, 'onCancel': function () {
                 Knockback.release(that.model, document.getElementById(modalId));
-                smwv.unbind(that);
+                kbValidation.unbind(that);
                 $("#" + modalId).modal('hide');
             }});
 
-            smwu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, assignRolesViewConfig);
+            cowu.renderView4Config($("#" + modalId).find("#sm-" + prefixId + "-form"), this.model, assignRolesViewConfig);
             this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
@@ -267,18 +267,18 @@ define([
                 serversToBeDeleted = {'serverId': [], 'elementId': elId};
             serversToBeDeleted['serverId'].push(checkedRows['id']);
 
-            smwu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'btnName': 'Confirm', 'body': textTemplate(serversToBeDeleted), 'onSave': function () {
+            cowu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'btnName': 'Confirm', 'body': textTemplate(serversToBeDeleted), 'onSave': function () {
                 that.model.deleteServer(options['checkedRows'], {
                     init: function () {
                         that.model.showErrorAttr(elId, false);
-                        smwu.enableModalLoading(modalId);
+                        cowu.enableModalLoading(modalId);
                     },
                     success: function () {
                         options['callback']();
                         $("#" + modalId).modal('hide');
                     },
                     error: function (error) {
-                        smwu.disableModalLoading(modalId, function () {
+                        cowu.disableModalLoading(modalId, function () {
                             that.model.showErrorAttr(elId, error.responseText);
                         });
                     }
@@ -290,7 +290,7 @@ define([
             this.model.showErrorAttr(elId, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
-            smwv.bind(this);
+            kbValidation.bind(this);
         }
     });
 
@@ -321,7 +321,7 @@ define([
             view: "AccordianView",
             viewConfig: [
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_SYSTEM_MANAGEMENT]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_SYSTEM_MANAGEMENT]),
                 title: smwl.TITLE_SYSTEM_MANAGEMENT,
                 view: "SectionView",
                 viewConfig: {
@@ -354,7 +354,7 @@ define([
                 }
             },
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_PHYSICAL_INTERFACES]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_PHYSICAL_INTERFACES]),
                 title: smwl.TITLE_PHYSICAL_INTERFACES,
                 view: "SectionView",
                 viewConfig: {
@@ -459,7 +459,7 @@ define([
                 }
             },
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_PROVISIONING]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_PROVISIONING]),
                 title: smwl.TITLE_PROVISIONING,
                 view: "SectionView",
                 viewConfig: {
@@ -578,7 +578,7 @@ define([
         view: "AccordianView",
         viewConfig: [
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_DETAILS]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_DETAILS]),
                 title: smwl.TITLE_DETAILS,
                 view: "SectionView",
                 viewConfig: {
@@ -597,7 +597,7 @@ define([
                 }
             },
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_PROVISIONING]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_PROVISIONING]),
                 title: smwl.TITLE_PROVISIONING,
                 view: "SectionView",
                 viewConfig: {
@@ -620,7 +620,7 @@ define([
                 }
             },
             {
-                elementId: smwu.formatElementId([prefixId, smwl.TITLE_SYSTEM_MANAGEMENT]),
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_SYSTEM_MANAGEMENT]),
                 title: smwl.TITLE_SYSTEM_MANAGEMENT,
                 view: "SectionView",
                 viewConfig: {

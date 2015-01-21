@@ -6,7 +6,7 @@ define([
     'underscore',
     'backbone',
     'knockout',
-    'common/ui/js/models/ContrailModel',
+    'contrail-model',
     'setting/sm/ui/js/models/InterfacesModel',
 ], function (_, Backbone, Knockout, ContrailModel, InterfaceModel) {
     var ServerModel = ContrailModel.extend({
@@ -52,7 +52,7 @@ define([
                     interfaces;
 
                 interfaces = this.getServerInterfaces(serverAttrs);
-                serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
+                serverAttrsEdited = cowu.getEditConfigObj(serverAttrs, locks);
                 serverAttrsEdited['network']['interfaces'] = interfaces;
 
                 for (var i = 0; i < checkedRows.length; i++) {
@@ -96,7 +96,7 @@ define([
                 locks = this.model().attributes.locks.attributes,
                 that = this;
 
-            serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
+            serverAttrsEdited = cowu.getEditConfigObj(serverAttrs, locks);
             $.each(checkedRows, function (checkedRowsKey, checkedRowsValue) {
                 serversEdited.push($.extend(true, {}, serverAttrsEdited, {id: checkedRowsValue.id}));
             });
@@ -133,7 +133,7 @@ define([
                     interfaces;
 
                 interfaces = this.getServerInterfaces(serverAttrs);
-                serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
+                serverAttrsEdited = cowu.getEditConfigObj(serverAttrs, locks);
                 serverAttrsEdited['network']['interfaces'] = interfaces;
 
                 serversCreated.push(serverAttrsEdited);
@@ -224,7 +224,7 @@ define([
                         }
                     });
 
-                    serverAttrsEdited = smwu.getEditConfigObj(serverAttrs, locks);
+                    serverAttrsEdited = cowu.getEditConfigObj(serverAttrs, locks);
 
                     $.each(checkedRows, function (checkedRowsKey, checkedRowsValue) {
                         serversEdited.push({'id': checkedRowsValue.id, 'tag': serverAttrsEdited['tag']});
