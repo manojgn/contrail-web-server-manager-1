@@ -5,7 +5,7 @@
 define([
     'underscore'
 ], function (_) {
-    var Constants = function () {
+    var SMConstants = function () {
         this.TIMEOUT = 600 * 1000;
         this.IMAGE_PREFIX_ID = 'image';
         this.PACKAGE_PREFIX_ID = 'package';
@@ -15,11 +15,6 @@ define([
         this.SM_PREFIX_ID = 'sm';
         this.BM_PREFIX_ID = 'bm';
 
-        this.TMPL_SUFFIX_ID = "-template";
-        this.RESULTS_SUFFIX_ID = "-results";
-        this.ERROR_SUFFIX_ID = "_error";
-        this.LOCKED_SUFFIX_ID = "_locked";
-        this.FORM_SUFFIX_ID = "_form";
 
         this.CATEGORY_IMAGE = 'image';
         this.CATEGORY_PACKAGE = 'package';
@@ -54,10 +49,6 @@ define([
             {'id': 'bond', 'text': 'Bond Interface'}
         ];
 
-        this.PATTERN_IP_ADDRESS  = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
-        this.PATTERN_SUBNET_MASK = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])(\/(\d|[1-2]\d|3[0-2]))?$/;
-        this.PATTERN_MAC_ADDRESS = /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
-
         this.SERVERS_STATE_PROCESSOR = "computeServerStates";
 
         this.URL_TAG_NAMES = '/sm/tags/names';
@@ -87,49 +78,22 @@ define([
         this.URL_HASH_SM_CLUSTERS = 'setting_sm_clusters';
         this.URL_HASH_SM_SERVERS = 'setting_sm_servers';
         this.URL_HASH_BM_SERVERS = 'config_pd_baremetal';
-        
-        this.KEY_MODEL_ERRORS = 'errors';
-        this.KEY_MODEL_LOCKS = 'locks';
-        this.KEY_ELEMENT_ID = 'elementId';
-        this.KEY_ROWS = 'rows';
-        this.KEY_COLUMNS = 'columns';
-        this.KEY_VIEW_CONFIG = 'viewConfig';
-        this.KEY_PATH = 'path';
-        this.KEY_ELEMENT_CONFIG = 'elementConfig';
-        this.KEY_DATABIND_VALUE = 'dataBindValue';
-        this.KEY_TYPE = 'type'
-        this.KEY_UI_ADDED_PARAMS = 'ui_added_parameters'
 
-        this.KEY_VALIDATION = 'validation';
         this.KEY_CONFIGURE_VALIDATION = 'configureValidation';
         this.KEY_EDIT_TAGS_VALIDATION = 'editTagsValidation';
         this.KEY_ADD_VALIDATION = 'addValidation';
         this.KEY_REIMAGE_VALIDATION = 'reimageValidation';
         this.KEY_PROVISION_VALIDATION = 'provisionValidation';
 
-        this.TMPL_ACCORDIAN_VIEW = "sm-accordian-view-template";
-        this.TMPL_DROPDOWN_VIEW = "sm-dropdown-view-template";
-        this.TMPL_GRID_DROPDOWN_VIEW = "sm-grid-dropdown-view-template";
-        this.TMPL_INPUT_VIEW = "sm-input-view-template";
-        this.TMPL_GRID_INPUT_VIEW = "sm-grid-input-view-template";
-        this.TMPL_CHECKBOX_VIEW = "sm-checkbox-view-template";
-        this.TMPL_GRID_CHECKBOX_VIEW = "sm-grid-checkbox-view-template";
-        this.TMPL_EDITABLE_GRID_VIEW = "sm-editable-grid-view-template";
-        this.TMPL_MULTISELECT_VIEW = "sm-multiselect-view-template";
-        this.TMPL_GRID_MULTISELECT_VIEW = "sm-grid-multiselect-view-template";
-        this.TMPL_SECTION_VIEW = "sm-section-view-template";
-        this.TMPL_EDIT_FORM = "sm-edit-form-template";
-        this.TMPL_2ROW_GROUP_DETAIL = "sm-grid-2-row-group-detail-template";
         this.TMPL_BAREMETAL_PAGE_DETAIL = "baremetal-detail-page-template";
-        this.TMPL_DETAIL_PAGE = "sm-detail-page-template";
-        this.TMPL_DETAIL_PAGE_ACTION = "sm-detail-page-action-template";
         this.TMPL_DELETE_IMAGE = "sm-delete-image-template";
         this.TMPL_DELETE_PACKAGE = "sm-delete-package-template";
+        this.TMPL_TAGS = "sm-tags-template";
 
         this.IMAGE_TYPES = ['ubuntu', 'centos', 'redhat', 'esxi5.1', 'esxi5.5'];
         this.PACKAGE_TYPES = ['contrail-ubuntu-package', 'contrail-centos-package', 'contrail-storage-ubuntu-package'];
         
         this.TMPL_BM_EDIT_FORM = "bm-edit-form-template";
     }
-    return Constants;
+    return SMConstants;
 });

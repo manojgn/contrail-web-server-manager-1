@@ -17,7 +17,7 @@ define([
                     putData = {}, packageAttrsEdited = [],
                     locks = this.model().attributes.locks.attributes;
 
-                locks['category' + smwc.LOCKED_SUFFIX_ID] = false;
+                locks['category' + cowc.LOCKED_SUFFIX_ID] = false;
                 packageAttrsEdited.push(cowu.getEditConfigObj(imageAttrs, locks));
                 putData[smwc.IMAGE_PREFIX_ID] = packageAttrsEdited;
 

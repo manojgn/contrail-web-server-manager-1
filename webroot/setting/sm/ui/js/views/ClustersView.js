@@ -10,7 +10,7 @@ define([
 ], function (_, Backbone, ClusterModel, ClusterEditView) {
     var prefixId = smwc.CLUSTER_PREFIX_ID,
         clusterEditView = new ClusterEditView(),
-        gridElId = '#' + prefixId + smwc.RESULTS_SUFFIX_ID;
+        gridElId = '#' + prefixId + cowc.RESULTS_SUFFIX_ID;
 
     var ClusterView = Backbone.View.extend({
         el: $(contentContainer),
@@ -25,7 +25,7 @@ define([
         },
 
         renderClustersList: function () {
-            var directoryTemplate = contrail.getTemplate4Id(smwc.SM_PREFIX_ID + smwc.TMPL_SUFFIX_ID);
+            var directoryTemplate = contrail.getTemplate4Id(smwc.SM_PREFIX_ID + cowc.TMPL_SUFFIX_ID);
 
             this.$el.html(directoryTemplate({name: prefixId}));
 
@@ -51,7 +51,7 @@ define([
                             }
                         },
                         detail: {
-                            template: $('#' + smwc.TMPL_2ROW_GROUP_DETAIL).html(),
+                            template: $('#' + cowc.TMPL_2ROW_GROUP_DETAIL).html(),
                             templateConfig: detailTemplateConfig
                         }
                     },
@@ -69,9 +69,9 @@ define([
         },
 
         renderCluster: function (clusterId) {
-            var detailTemplate = contrail.getTemplate4Id(smwc.TMPL_2ROW_GROUP_DETAIL),
-                clusterTemplate = contrail.getTemplate4Id(smwc.TMPL_DETAIL_PAGE),
-                clusterActionTemplate = contrail.getTemplate4Id(smwc.TMPL_DETAIL_PAGE_ACTION),
+            var detailTemplate = contrail.getTemplate4Id(cowc.TMPL_2ROW_GROUP_DETAIL),
+                clusterTemplate = contrail.getTemplate4Id(cowc.TMPL_DETAIL_PAGE),
+                clusterActionTemplate = contrail.getTemplate4Id(cowc.TMPL_DETAIL_PAGE_ACTION),
                 ajaxConfig = {}, that = this;
             ajaxConfig.type = "GET";
             ajaxConfig.cache = "true";
@@ -169,7 +169,7 @@ define([
 
     var rowActionConfig = [
         smwgc.getAddServersAction(function (rowIndex) {
-            var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+            var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                 clusterModel = new ClusterModel(dataItem),
                 title = smwl.TITLE_ADD_SERVERS + ' ('+ dataItem['id'] +')';
 
@@ -180,7 +180,7 @@ define([
             }});
         }),
         smwgc.getRemoveServersAction(function (rowIndex) {
-            var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+            var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                 clusterModel = new ClusterModel(dataItem),
                 title = smwl.TITLE_REMOVE_SERVERS + ' ('+ dataItem['id'] +')';
 
@@ -191,7 +191,7 @@ define([
             }});
         }),
         smwgc.getAssignRoleAction(function (rowIndex) {
-            var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+            var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                 clusterModel = new ClusterModel(dataItem),
                 checkedRow = [dataItem],
                 title = smwl.TITLE_ASSIGN_ROLES + ' ('+ dataItem['id'] +')';
@@ -203,7 +203,7 @@ define([
             }});
         }),
         smwgc.getConfigureAction(function (rowIndex) {
-            var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+            var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                 clusterModel = new ClusterModel(dataItem),
                 checkedRow = [dataItem],
                 title = smwl.TITLE_EDIT_CONFIG + ' ('+ dataItem['id'] +')';
@@ -215,7 +215,7 @@ define([
             }});
         }),
         smwgc.getReimageAction(function (rowIndex) {
-            var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+            var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                 clusterModel = new ClusterModel(dataItem),
                 checkedRow = [dataItem],
                 title = smwl.TITLE_REIMAGE + ' ('+ dataItem['id'] +')';
@@ -227,7 +227,7 @@ define([
             }});
         }, true),
         smwgc.getProvisionAction(function (rowIndex) {
-            var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+            var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                 clusterModel = new ClusterModel(dataItem),
                 checkedRow = [dataItem],
                 title = smwl.TITLE_PROVISION_CLUSTER + ' ('+ dataItem['id'] +')';
@@ -239,7 +239,7 @@ define([
             }});
         }),
         smwgc.getDeleteAction(function (rowIndex) {
-            var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+            var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                 clusterModel = new ClusterModel(dataItem),
                 checkedRow = dataItem,
                 title = smwl.TITLE_DEL_CLUSTER + ' ('+ dataItem['id'] +')';

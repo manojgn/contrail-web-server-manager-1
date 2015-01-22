@@ -16,12 +16,12 @@ define([
         validateAttr: function (attributePath, validation, data) {
             var model = data.model().attributes.model(),
                 attr = cowu.getAttributeFromPath(attributePath),
-                errors = model.get(smwc.KEY_MODEL_ERRORS),
+                errors = model.get(cowc.KEY_MODEL_ERRORS),
                 attrErrorObj = {}, isValid;
 
             isValid = model.isValid(attributePath, validation);
 
-            attrErrorObj[attr + smwc.ERROR_SUFFIX_ID] = (isValid == true) ? false : isValid;
+            attrErrorObj[attr + cowc.ERROR_SUFFIX_ID] = (isValid == true) ? false : isValid;
             errors.set(attrErrorObj);
         },
 
@@ -29,12 +29,12 @@ define([
             baremetalInterfaceValidation: {
                 'baremetal_interface': {
                     required: true,
-                    pattern: smwc.PATTERN_MAC_ADDRESS,
+                    pattern: cowc.PATTERN_MAC_ADDRESS,
                     msg: smwm.getShortInvalidErrorMessage('mac_address')
                 },
                 'vn': {
                     required: true,
-                    pattern: smwc.PATTERN_IP_ADDRESS,
+                    pattern: cowc.PATTERN_IP_ADDRESS,
                     msg: smwm.getShortInvalidErrorMessage('gateway')
                 }
             }

@@ -445,7 +445,7 @@ define([
                 },
                 'ipmi_address': {
                     required: true,
-                    pattern: smwc.PATTERN_IP_ADDRESS,
+                    pattern: cowc.PATTERN_IP_ADDRESS,
                     msg: smwm.getInvalidErrorMessage('ipmi_address')
                 },
                 'email': {

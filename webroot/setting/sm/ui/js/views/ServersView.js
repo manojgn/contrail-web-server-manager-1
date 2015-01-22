@@ -9,7 +9,7 @@ define([
     'setting/sm/ui/js/views/ServerEditView'
 ], function (_, Backbone, ServerModel, ServerEditView) {
     var prefixId = smwc.SERVER_PREFIX_ID,
-        gridElId = '#' + prefixId + smwc.RESULTS_SUFFIX_ID,
+        gridElId = '#' + prefixId + cowc.RESULTS_SUFFIX_ID,
         serverEditView = new ServerEditView();
 
     var ServersView = Backbone.View.extend({
@@ -25,7 +25,7 @@ define([
         },
 
         renderServersList: function (viewConfig) {
-            var smTemplate = contrail.getTemplate4Id(smwc.SM_PREFIX_ID + smwc.TMPL_SUFFIX_ID),
+            var smTemplate = contrail.getTemplate4Id(smwc.SM_PREFIX_ID + cowc.TMPL_SUFFIX_ID),
                 serverColumnsType = viewConfig['serverColumnsType'],
                 showAssignRoles = viewConfig['showAssignRoles'];
 
@@ -55,7 +55,7 @@ define([
                             }
                         },
                         detail: {
-                            template: $('#' + smwc.TMPL_2ROW_GROUP_DETAIL).html(),
+                            template: $('#' + cowc.TMPL_2ROW_GROUP_DETAIL).html(),
                             templateConfig: detailTemplateConfig
                         },
                         sortable: {
@@ -79,9 +79,9 @@ define([
         },
 
         renderServer: function (serverId) {
-            var detailTemplate = contrail.getTemplate4Id(smwc.TMPL_2ROW_GROUP_DETAIL),
-                serverTemplate = contrail.getTemplate4Id(smwc.TMPL_DETAIL_PAGE),
-                serverActionTemplate = contrail.getTemplate4Id(smwc.TMPL_DETAIL_PAGE_ACTION),
+            var detailTemplate = contrail.getTemplate4Id(cowc.TMPL_2ROW_GROUP_DETAIL),
+                serverTemplate = contrail.getTemplate4Id(cowc.TMPL_DETAIL_PAGE),
+                serverActionTemplate = contrail.getTemplate4Id(cowc.TMPL_DETAIL_PAGE_ACTION),
                 ajaxConfig = {}, that = this;
 
             ajaxConfig.type = "GET";
@@ -228,7 +228,7 @@ define([
     function getRowActionConfig(showAssignRoles) {
         var rowActionConfig = [
             smwgc.getConfigureAction(function (rowIndex) {
-                var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+                var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                     serverModel = new ServerModel(dataItem),
                     checkedRow = [dataItem],
                     title = smwl.TITLE_EDIT_CONFIG + ' ('+ dataItem['id'] +')';
@@ -240,7 +240,7 @@ define([
                 }});
             }),
             smwgc.getTagAction(function (rowIndex) {
-                var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+                var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                     serverModel = new ServerModel(dataItem),
                     checkedRow = [dataItem],
                     title = smwl.TITLE_EDIT_TAGS + ' ('+ dataItem['id'] +')';
@@ -261,7 +261,7 @@ define([
 
         if (showAssignRoles) {
             rowActionConfig.push(smwgc.getAssignRoleAction(function (rowIndex) {
-                var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+                var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                     serverModel = new ServerModel(dataItem),
                     checkedRow = [dataItem],
                     title = smwl.TITLE_ASSIGN_ROLES + ' ('+ dataItem['id'] +')';
@@ -274,7 +274,7 @@ define([
             }));
         }
         rowActionConfig = rowActionConfig.concat([smwgc.getReimageAction(function (rowIndex) {
-                var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+                var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                     serverModel = new ServerModel(dataItem),
                     checkedRow = [dataItem],
                     title = smwl.TITLE_REIMAGE + ' ('+ dataItem['id'] +')';
@@ -286,7 +286,7 @@ define([
                 }});
             }, true),
             smwgc.getProvisionAction(function (rowIndex) {
-                var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+                var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                     serverModel = new ServerModel(dataItem),
                     checkedRow = [dataItem],
                     title = smwl.TITLE_PROVISION_SERVER + ' ('+ dataItem['id'] +')';
@@ -298,7 +298,7 @@ define([
                 }});
             }),
             smwgc.getDeleteAction(function (rowIndex) {
-                var dataItem = $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
+                var dataItem = $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.getItem(rowIndex),
                     serverModel = new ServerModel(dataItem),
                     checkedRow = dataItem,
                     title = smwl.TITLE_DEL_SERVER + ' ('+ dataItem['id'] +')';
@@ -519,10 +519,10 @@ define([
 
     function applyServerTagFilter(event, ui) {
         var checkedRows = $('#tagsCheckedMultiselect').data('contrailCheckedMultiselect').getChecked();
-        $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.setFilterArgs({
+        $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.setFilterArgs({
             checkedRows: checkedRows
         });
-        $('#' + prefixId + smwc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.setFilter(serverTagGridFilter);
+        $('#' + prefixId + cowc.RESULTS_SUFFIX_ID).data('contrailGrid')._dataView.setFilter(serverTagGridFilter);
     };
 
     /*

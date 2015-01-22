@@ -37,8 +37,8 @@ define([
             cowu.renderView4Config($("#" + modalId).find("#bm-" + prefixId + "-form"), this.model,
                     getAddBaremetalViewConfig(that.model, options['callback']), smwc.KEY_ADD_VALIDATION);
             
-            this.model.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_SELECT_SERVER]) + smwc.FORM_SUFFIX_ID, false);
-            this.model.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID, false);
+            this.model.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_SELECT_SERVER]) + cowc.FORM_SUFFIX_ID, false);
+            this.model.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID, false);
             
             Knockback.applyBindings(this.model, document.getElementById(modalId));
             kbValidation.bind(this);
@@ -102,7 +102,7 @@ define([
                     });
                 }
             })        
-            this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
+            this.model.showErrorAttr(prefixId + cowc.FORM_SUFFIX_ID, false);
             
             Knockback.applyBindings(this.model, document.getElementById(modalId));
             kbValidation.bind(this);
@@ -115,7 +115,7 @@ define([
             cowu.createModal({'modalId': modalId, 'className': 'modal-700', 'title': options['title'], 'body': editLayout, 'onSave': function () {
                 that.model.reimage(options['checkedRows'],{
                     init: function () {
-                        that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
+                        that.model.showErrorAttr(prefixId + cowc.FORM_SUFFIX_ID, false);
                         cowu.enableModalLoading(modalId);
                     },
                     success: function () {
@@ -124,7 +124,7 @@ define([
                     },
                     error: function (error) {
                         cowu.disableModalLoading(modalId, function () {
-                            that.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, error.responseText);
+                            that.model.showErrorAttr(prefixId + cowc.FORM_SUFFIX_ID, error.responseText);
                         });
                     }
                 });
@@ -136,7 +136,7 @@ define([
             }});
 
             cowu.renderView4Config($("#" + modalId).find("#bm-" + prefixId + "-form"), this.model, reimageViewConfig, "configureValidation");
-            this.model.showErrorAttr(prefixId + smwc.FORM_SUFFIX_ID, false);
+            this.model.showErrorAttr(prefixId + cowc.FORM_SUFFIX_ID, false);
 
             Knockback.applyBindings(this.model, document.getElementById(modalId));
             kbValidation.bind(this);
@@ -495,10 +495,10 @@ define([
             onNext: function (params) {
                 var checkedRows =  $('#' + cowu.formatElementId([prefixId, smwl.TITLE_SELECT_BAREMETAL_SERVER, smwl.TITLE_FILTER_BAREMETALS])).data('contrailGrid').getCheckedRows();
                 if(checkedRows.length == 0){
-                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_SELECT_SERVER]) + smwc.FORM_SUFFIX_ID,'Please select a server');
+                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_SELECT_SERVER]) + cowc.FORM_SUFFIX_ID,'Please select a server');
                     return false
                 } else if(checkedRows.length > 1){
-                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_SELECT_SERVER]) + smwc.FORM_SUFFIX_ID,'Please select only one server');
+                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_SELECT_SERVER]) + cowc.FORM_SUFFIX_ID,'Please select only one server');
                     return false;
                 } else {
                     baremetalModel.selectedServer = checkedRows[0]
@@ -545,7 +545,7 @@ define([
                    var serverManagementMac = selectedServer['mac_address'];
                    var ip = selectedServer.ip_address.trim();
                     if(interfaceMappings.length == 0){
-                        baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID,'Please map atleast one interface');
+                        baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID,'Please map atleast one interface');
                     } else if(!checkIfInterfaceRepeated(interfaceMappings)){
                         $.each(interfaceMappings,function(i,interfaceMapping){
                             var mac = params.model.baremetalIntfMap[interfaceMapping['interface']];
@@ -577,7 +577,7 @@ define([
                                       }
                                 }
                                 if(!isIPinRange) {
-                                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID,'IP ' + intfIP + ' is not in the CIDR ' + subNet);
+                                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID,'IP ' + intfIP + ' is not in the CIDR ' + subNet);
                                     return;
                                 }
                             }
@@ -597,7 +597,7 @@ define([
                             configureBaremetal(data,params,baremetalModel);
                         });
                     } else {
-                        baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID,'Please select different interfaces');
+                        baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID,'Please select different interfaces');
                     }
                 },
                 buttons: {
@@ -637,7 +637,7 @@ define([
     function configureBaremetal(data,params,baremetalModel){
         params.model.createVMI(data, {
             init: function () {
-                baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID, false);
+                baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID, false);
                 cowu.enableModalLoading(modalId);
             },
             success: function (response) {
@@ -646,7 +646,7 @@ define([
             },
             error: function (error) {
                 cowu.disableModalLoading(modalId, function () {
-                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID, error.responseText);
+                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID, error.responseText);
                 });
             }
         });
@@ -655,14 +655,14 @@ define([
     function createVM(vmiDetails,data,params,baremetalModel){
         params.model.createVM(vmiDetails[2], data.serverId,  {
             init: function () {
-                baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID, false);
+                baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID, false);
             },
             success: function () {
                 createLogicalInterface(data,vmiDetails,params,baremetalModel);
             },
             error: function (error) {
                 cowu.disableModalLoading(modalId, function () {
-                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID, error.responseText);
+                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID, error.responseText);
                 });
             }
         });
@@ -671,7 +671,7 @@ define([
     function createLogicalInterface(data,vmiDetails,params,baremetalModel){
         params.model.createLogicalInterface(data,vmiDetails, {
             init: function () {
-                baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID, false);
+                baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID, false);
             },
             success: function () {
                 cowu.disableModalLoading(modalId, function () {
@@ -685,7 +685,7 @@ define([
                             },
                             error:function(error){
                                 cowu.disableModalLoading(modalId, function () {
-                                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID, error.responseText);
+                                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID, error.responseText);
                                 });
 //                                loadFeature({p: smwc.URL_HASH_BM_SERVERS});
                             }
@@ -697,7 +697,7 @@ define([
             },
             error: function (error) {
                 cowu.disableModalLoading(modalId, function () {
-                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + smwc.FORM_SUFFIX_ID, error.responseText);
+                    baremetalModel.showErrorAttr(cowu.formatElementId([prefixId, smwl.TITLE_CONFIGURE_SERVER]) + cowc.FORM_SUFFIX_ID, error.responseText);
                 });
             }
         });

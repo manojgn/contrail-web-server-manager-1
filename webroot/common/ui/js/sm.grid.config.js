@@ -34,49 +34,49 @@ define([
             { id: "email", field: "email", name: "Email", width: 150, minWidth: 15 },
             { id: "new-servers", field: "", name: "New Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
                 formatter: function (r, c, v, cd, dc) {
-                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                    var uiParams = dc[cowc.KEY_UI_ADDED_PARAMS],
                         serverStatus = uiParams['servers_status'];
                     return serverStatus['new_servers'];
                 }
             },
             { id: "configured-servers", field: "", name: "Configured Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
                 formatter: function (r, c, v, cd, dc) {
-                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                    var uiParams = dc[cowc.KEY_UI_ADDED_PARAMS],
                         serverStatus = uiParams['servers_status'];
                     return serverStatus['configured_servers'];
                 }
             },
             { id: "inreimage_servers", field: "", name: "In-Reimage Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
                 formatter: function (r, c, v, cd, dc) {
-                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                    var uiParams = dc[cowc.KEY_UI_ADDED_PARAMS],
                         serverStatus = uiParams['servers_status'];
                     return serverStatus['inreimage_servers'];
                 }
             },
             { id: "reimaged_servers", field: "", name: "Reimaged Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
                 formatter: function (r, c, v, cd, dc) {
-                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                    var uiParams = dc[cowc.KEY_UI_ADDED_PARAMS],
                         serverStatus = uiParams['servers_status'];
                     return serverStatus['reimaged_servers'];
                 }
             },
             { id: "inprovision_servers", field: "", name: "In-Provision Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
                 formatter: function (r, c, v, cd, dc) {
-                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                    var uiParams = dc[cowc.KEY_UI_ADDED_PARAMS],
                         serverStatus = uiParams['servers_status'];
                     return serverStatus['inprovision_servers'];
                 }
             },
             { id: "provisioned-servers", field: "", name: "Provisioned Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
                 formatter: function (r, c, v, cd, dc) {
-                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                    var uiParams = dc[cowc.KEY_UI_ADDED_PARAMS],
                         serverStatus = uiParams['servers_status'];
                     return serverStatus['provisioned_servers'];
                 }
             },
             { id: "total-servers", field: "", name: "Total Servers", width: 120, minWidth: 15, sortable : {sortBy: 'formattedValue'},
                 formatter: function (r, c, v, cd, dc) {
-                    var uiParams = dc[smwc.KEY_UI_ADDED_PARAMS],
+                    var uiParams = dc[cowc.KEY_UI_ADDED_PARAMS],
                         serverStatus = uiParams['servers_status'];
                     return serverStatus['total_servers'];
                 }
@@ -209,7 +209,7 @@ define([
             {
                 id: "tag", field: "tag", name: "Tags", width: 125, minWidth: 125,
                 formatter: function (r, c, v, cd, dc) {
-                    var tagTemplate = contrail.getTemplate4Id("sm-tags-template"),
+                    var tagTemplate = contrail.getTemplate4Id(smwc.TMPL_TAGS),
                         tagHTML = tagTemplate({tags: dc.tag, colors: smwc.CACHED_TAG_COLORS, allowLink: false});
                     return tagHTML;
                 },
@@ -242,7 +242,7 @@ define([
                     {
                         id: "tag", field: "tag", name: "Tags", width: 150, minWidth: 150, sortable: false,
                         formatter: function (r, c, v, cd, dc) {
-                            var tagTemplate = contrail.getTemplate4Id("sm-tags-template"),
+                            var tagTemplate = contrail.getTemplate4Id(smwc.TMPL_TAGS),
                                 tagHTML = tagTemplate({tags: dc.tag, colors: smwc.CACHED_TAG_COLORS, allowLink: true});
                             return tagHTML;
                         },

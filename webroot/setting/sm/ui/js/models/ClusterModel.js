@@ -24,12 +24,12 @@ define([
             },
             'parameters.subnet_mask': {
                 required: true,
-                pattern: smwc.PATTERN_SUBNET_MASK,
+                pattern: cowc.PATTERN_SUBNET_MASK,
                 msg: smwm.getInvalidErrorMessage('subnet_mask')
             },
             'parameters.gateway': {
                 required: false,
-                pattern: smwc.PATTERN_IP_ADDRESS,
+                pattern: cowc.PATTERN_IP_ADDRESS,
                 msg: smwm.getInvalidErrorMessage('gateway')
             },
 
@@ -50,17 +50,17 @@ define([
 
             'parameters.openstack_mgmt_ip': {
                 required: false,
-                pattern: smwc.PATTERN_IP_ADDRESS,
+                pattern: cowc.PATTERN_IP_ADDRESS,
                 msg: smwm.getInvalidErrorMessage('openstack_mgmt_ip')
             },
             'parameters.compute_non_mgmt_ip': {
                 required: false,
-                pattern: smwc.PATTERN_IP_ADDRESS,
+                pattern: cowc.PATTERN_IP_ADDRESS,
                 msg: smwm.getInvalidErrorMessage('compute_non_mgmt_ip')
             },
             'parameters.compute_non_mgmt_gway': {
                 required: false,
-                pattern: smwc.PATTERN_IP_ADDRESS,
+                pattern: cowc.PATTERN_IP_ADDRESS,
                 msg: smwm.getInvalidErrorMessage('compute_non_mgmt_gway')
             },
 
