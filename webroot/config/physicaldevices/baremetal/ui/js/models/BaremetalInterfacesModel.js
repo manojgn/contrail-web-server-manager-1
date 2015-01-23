@@ -4,7 +4,7 @@
 
 define([
     'underscore',
-    'common/ui/js/models/ContrailModel'
+    'contrail-model'
 ], function (_, ContrailModel) {
     var InterfacesModel = ContrailModel.extend({
 
