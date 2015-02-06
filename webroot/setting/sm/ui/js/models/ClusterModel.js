@@ -68,6 +68,11 @@ define([
                 required: true,
                 msg: smwm.getRequiredMessage('keystone_tenant')
             },
+            'parameters.keystone_ip': {
+                required: false,
+                pattern: smwc.PATTERN_IP_ADDRESS,
+                msg: smwm.getInvalidErrorMessage('keystone_ip')
+            },
             'parameters.keystone_username': {
                 required: true,
                 msg: smwm.getRequiredMessage('keystone_username')
@@ -76,13 +81,35 @@ define([
                 required: true,
                 msg: smwm.getRequiredMessage('keystone_password')
             },
-            'parameters.openstack_passwd': {
-                required: true,
-                msg: smwm.getRequiredMessage('openstack_passwd')
-            },
             'parameters.password': {
                 required: true,
                 msg: smwm.getRequiredMessage('password')
+            },
+
+            'parameters.internal_vip': {
+                required: false,
+                pattern: cowc.PATTERN_IP_ADDRESS,
+                msg: smwm.getInvalidErrorMessage('internal_vip')
+            },
+            'parameters.external_vip': {
+                required: false,
+                pattern: cowc.PATTERN_IP_ADDRESS,
+                msg: smwm.getInvalidErrorMessage('external_vip')
+            },
+            'parameters.contrail_internal_vip': {
+                required: false,
+                pattern: cowc.PATTERN_IP_ADDRESS,
+                msg: smwm.getInvalidErrorMessage('contrail_internal_vip')
+            },
+            'parameters.contrail_external_vip': {
+                required: false,
+                pattern: cowc.PATTERN_IP_ADDRESS,
+                msg: smwm.getInvalidErrorMessage('contrail_external_vip')
+            },
+            'parameters.nfs_server': {
+                required: false,
+                pattern: cowc.PATTERN_IP_ADDRESS,
+                msg: smwm.getInvalidErrorMessage('nfs_server')
             },
 
             'parameters.database_dir': {

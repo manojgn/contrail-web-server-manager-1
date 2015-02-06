@@ -22,7 +22,7 @@ define([
         this.SM_API_SERVER = 'sm-api-server';
         this.DFLT_SERVER_IP = '127.0.0.1';
 
-        this.ROLES_ARRAY = ['config', 'openstack', 'control', 'compute', 'collector', 'webui', 'database'];
+        this.ROLES_ARRAY = ['config', 'openstack', 'control', 'compute', 'collector', 'webui', 'database', 'storage-compute', 'storage-master'];
         this.ROLES_OBJECTS = [
             {'id': 'config', 'text': 'Config'},
             {'id': 'openstack', 'text': 'Openstack'},
@@ -30,7 +30,9 @@ define([
             {'id': 'compute', 'text': 'Compute'},
             {'id': 'collector', 'text': 'Collector'},
             {'id': 'webui', 'text': 'Webui'},
-            {'id': 'database', 'text': 'Database'}
+            {'id': 'database', 'text': 'Database'},
+            {'id': 'storage-compute', 'text': 'Storage Compute'},
+            {'id': 'storage-master', 'text': 'Storage Master'}
         ];
 
         this.STATES = [
@@ -38,15 +40,26 @@ define([
             {'id': 'disable', 'text': 'Disable'}
 
         ];
+
+        this.INTERFACE_TYPES = [
+            {
+                text: 'physical',
+                value: 'physical'
+            },
+            {
+                text: 'bond',
+                value: 'bond'
+            }
+        ];
+
         this.FLAGS = [
             {'id': 'false', 'text': 'False'},
             {'id': 'true', 'text': 'True'}
         ];
 
-        this.INTERFACE_TYPES = [
-            {'id': 'physical', 'text': 'Physical Interface'},
-            {'id': 'subinterface', 'text': 'Sub Interface'},
-            {'id': 'bond', 'text': 'Bond Interface'}
+        this.STORAGE_SCOPE = [
+            {'id': 'global', 'text': 'Global'},
+            {'id': 'local', 'text': 'Local'}
         ];
 
         this.SERVERS_STATE_PROCESSOR = "computeServerStates";
@@ -90,9 +103,9 @@ define([
         this.TMPL_DELETE_PACKAGE = "sm-delete-package-template";
         this.TMPL_TAGS = "sm-tags-template";
 
-        this.IMAGE_TYPES = ['ubuntu', 'centos', 'redhat', 'esxi5.1', 'esxi5.5'];
+        this.IMAGE_TYPES = ['ubuntu', 'centos', 'redhat', 'esxi5.1', 'esxi5.5', 'fedora'];
         this.PACKAGE_TYPES = ['contrail-ubuntu-package', 'contrail-centos-package', 'contrail-storage-ubuntu-package'];
-        
+
         this.TMPL_BM_EDIT_FORM = "bm-edit-form-template";
     }
     return SMConstants;

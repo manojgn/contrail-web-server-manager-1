@@ -349,6 +349,11 @@ define([
                                 {elementId: 'ipmi_username', view: "FormInputView", viewConfig: {path: 'ipmi_username', dataBindValue: 'ipmi_username', class: "span6"}},
                                 {elementId: 'ipmi_password', view: "FormInputView", viewConfig: {path: 'ipmi_password', type: 'password', dataBindValue: 'ipmi_password', class: "span6"}}
                             ]
+                        },
+                        {
+                            columns: [
+                                {elementId: 'partition', view: "FormInputView", viewConfig: {path: 'parameters.partition', dataBindValue: 'parameters().partition', class: "span6"}},
+                            ]
                         }
                     ]
                 }
@@ -443,7 +448,14 @@ define([
                                             {elementId: 'name', name: 'Name', view: "GridInputView", class: "", width: 200, viewConfig: {path: "name", dataBindValue: "name()"}},
                                             {elementId: 'ip_address', name: 'IP/Mask', view: "GridInputView", class: "", width: 155, viewConfig: {path: "ip_address", dataBindValue: "ip_address()"}},
                                             {elementId: 'dhcp', name: 'DHCP', view: "GridCheckboxView", class: "", width:50, viewConfig: {path: "dhcp", dataBindValue: "dhcp()"}},
-                                            {elementId: 'parent', name: 'Parent Interface', view: "GridDropdownView", class: "", width: 200, viewConfig: {path: 'parent', dataBindValue: 'parent()', width: 200, elementConfig: {placeholder: smwl.SELECT_PARENT_INTERFACE, data: '$root.getParentInterfaces()'}}}
+                                            {
+                                                elementId: 'parent', name: 'Parent Interface', view: "GridDropdownView", class: "", width: 200,
+                                                viewConfig: {
+                                                    path: 'parent', dataBindValue: 'parent()', width: 200, elementConfig: {
+                                                        placeholder: smwl.SELECT_PARENT_INTERFACE, data: '$root.getParentInterfaces()'
+                                                    }
+                                                }
+                                            }
                                         ],
                                         rowActions: [
                                             {onClick: "function() { $root.deleteInterface($data, this); }", iconClass: 'icon-minus'}
@@ -455,6 +467,121 @@ define([
                                 }
                             ]
                         }
+                    ]
+                }
+            },
+
+            {
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_CONTRAIL_CONTROLLER]),
+                title: smwl.TITLE_CONTRAIL_CONTROLLER,
+                view: "SectionView",
+                viewConfig: {
+                    rows: [
+                        {
+                            columns: [
+                                {
+                                    elementId: 'package_image_id',
+                                    view: "FormDropdownView",
+                                    viewConfig: {
+                                        path: 'package_image_id', dataBindValue: 'package_image_id', class: "span6",
+                                        elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInContrailControllerPackages')}}}
+                                },
+                                {
+                                    elementId: 'control_data_interface',
+                                    view: "FormSelect2DropdownView",
+                                    viewConfig: {
+                                        path: 'contrail.control_data_interface',
+                                        dataBindValue: 'contrail().control_data_interface',
+                                        class: "span6",
+                                        elementConfig: {
+                                            placeholder: smwl.TITLE_SELECT_CONTROL_DATA_INTERFACE,
+                                            data: '$root.getControlDataInterfaces()'
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_CONTRAIL_STORAGE]),
+                title: smwl.TITLE_CONTRAIL_STORAGE,
+                view: "SectionView",
+                viewConfig: {
+                    rows: [
+                        {
+                            columns: [
+                                {
+                                    elementId: 'storage_repo_id',
+                                    view: "FormDropdownView",
+                                    viewConfig: {path: 'parameters.storage_repo_id', dataBindValue: 'parameters().storage_repo_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInContrailStoragePackages')}}}
+                                },
+                                {
+                                    elementId: 'live_migration',
+                                    view: "FormDropdownView",
+                                    viewConfig: {path: 'parameters.live_migration', dataBindValue: 'parameters().live_migration', class: "span6", elementConfig: {dataTextField: "text", dataValueField: "id", data: smwc.STATES}}},
+                            ]
+                        },
+                        {
+                            columns: [
+                                {
+                                    elementId: 'live_migration_nfs_vm_host',
+                                    view: "FormInputView",
+                                    viewConfig: {path: 'parameters.live_migration_nfs_vm_host', dataBindValue: 'parameters().live_migration_nfs_vm_host', class: "span6"}
+                                },
+                                {
+                                    elementId: 'live_migration_storage_scope',
+                                    view: "FormDropdownView",
+                                    viewConfig: {path: 'parameters.live_migration_storage_scope', dataBindValue: 'parameters().live_migration_storage_scope', class: "span6", elementConfig: {placeholder: smwl.TITLE_SELECT, dataTextField: "text", dataValueField: "id", data: smwc.STORAGE_SCOPE}}},
+
+                            ]
+                        },
+                        //{ Disks Grid
+                        //    columns: [
+                        //        {
+                        //            elementId: 'server-disks-grid',
+                        //            view: "FormDynamicGridView",
+                        //            viewConfig: {
+                        //                path: 'parameters.disks',
+                        //                class: "span12",
+                        //                modelAttributePath: 'parameters.disks',
+                        //                elementConfig: {
+                        //                    options: {
+                        //                        uniqueColumn: 'disk',
+                        //                    },
+                        //                    columns: [
+                        //                        {
+                        //                            id: "disk", name: "Storage Disks", field: "disk", width: 720,
+                        //                            editor: ContrailGrid.Editors.Text,
+                        //                            formatter: ContrailGrid.Formatters.Text,
+                        //                            validator: function (value) {
+                        //                                var valid = true,
+                        //                                    disks = $('#server-disks-grid').data('contrailDynamicgrid')._grid.getData();
+                        //
+                        //                                $.each(disks, function(diskKey, diskValue) {
+                        //                                    if (diskValue.disk == value) {
+                        //                                        valid = false;
+                        //                                        return
+                        //                                    }
+                        //                                });
+                        //
+                        //                                return {
+                        //                                    valid: valid,
+                        //                                    message: (!valid) ? 'Duplicate Disk' : null
+                        //                                }
+                        //
+                        //                            },
+                        //                            elementConfig: {
+                        //                                placeholder: 'Disk Location'
+                        //                            }
+                        //                        },
+                        //                    ]
+                        //                }
+                        //            }
+                        //        }
+                        //    ]
+                        //}
                     ]
                 }
             },
@@ -470,9 +597,27 @@ define([
                                 {
                                     elementId: 'cluster_id',
                                     view: "FormDropdownView",
-                                    viewConfig: {path: 'cluster_id', dataBindValue: "cluster_id", class: "span6", elementConfig: {allowClear: true, placeholder: smwl.SELECT_CLUSTER, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectUrl(smwc.CLUSTER_PREFIX_ID, smwc.CLUSTER_PREFIX_ID)}}}
+                                    viewConfig: {
+                                        path: 'cluster_id',
+                                        dataBindValue: "cluster_id",
+                                        class: "span6",
+                                        elementConfig: {
+                                            allowClear: true,
+                                            placeholder: smwl.SELECT_CLUSTER,
+                                            dataTextField: "id",
+                                            dataValueField: "id",
+                                            dataSource: {
+                                                type: 'remote',
+                                                url: smwu.getObjectUrl(smwc.CLUSTER_PREFIX_ID, smwc.CLUSTER_PREFIX_ID)
+                                            }
+                                        }
+                                    }
                                 },
-                                {elementId: 'email', view: "FormInputView", viewConfig: {path: 'email', dataBindValue: 'email', class: "span6"}}
+                                {
+                                    elementId: 'email',
+                                    view: "FormInputView",
+                                    viewConfig: {path: 'email', dataBindValue: 'email', class: "span6"}
+                                }
                             ]
                         },
                         {
@@ -480,27 +625,39 @@ define([
                                 {
                                     elementId: 'base_image_id',
                                     view: "FormDropdownView",
-                                    viewConfig: {path: 'base_image_id', dataBindValue: 'base_image_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_IMAGE, dataTextField: "id", dataValueField: "id", dataSource: { type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInImages')}}}
+                                    viewConfig: {
+                                        path: 'base_image_id',
+                                        dataBindValue: 'base_image_id',
+                                        class: "span6",
+                                        elementConfig: {
+                                            placeholder: smwl.SELECT_IMAGE,
+                                            dataTextField: "id",
+                                            dataValueField: "id",
+                                            dataSource: {
+                                                type: 'remote',
+                                                url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInImages')
+                                            }
+                                        }
+                                    }
                                 },
                                 {
-                                    elementId: 'package_image_id',
-                                    view: "FormDropdownView",
-                                    viewConfig: {path: 'package_image_id', dataBindValue: 'package_image_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInPackages')}}}
-                                }
-                            ]
-                        },
-                        {
-                            columns: [
-                                {
-                                    elementId: 'control_data_interface',
-                                    view: "FormDropdownView",
-                                    viewConfig: {path: 'contrail.control_data_interface', dataBindValue: 'contrail().control_data_interface', class: "span6", elementConfig: {placeholder: smwl.TITLE_SELECT_CONTROL_DATA_INTERFACE, dataTextField: "id", dataValueField: "id", data: []}}
+                                    elementId: 'management_interface',
+                                    view: "FormSelect2DropdownView",
+                                    viewConfig: {
+                                        path: 'network.management_interface', dataBindValue: 'network().management_interface', class: "span6",
+                                        elementConfig: {
+                                            placeholder: smwl.TITLE_SELECT_MANAGEMENT_INTERFACE, dataTextField: "id", dataValueField: "id", data: '$root.getManagementInterfaces()',
+                                            multiple: false
+                                        }
+                                    }
                                 }
                             ]
                         }
                     ]
                 }
-            }
+            },
+
+
             /*
             {
                 elementId: cowu.formatElementId([prefixId, smwl.TITLE_ROUTE_CONFIGRATIONS]),
@@ -578,19 +735,73 @@ define([
         view: "AccordianView",
         viewConfig: [
             {
-                elementId: cowu.formatElementId([prefixId, smwl.TITLE_DETAILS]),
-                title: smwl.TITLE_DETAILS,
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_SYSTEM_MANAGEMENT]),
+                title: smwl.TITLE_SYSTEM_MANAGEMENT,
+                view: "SectionView",
+                viewConfig: {
+                    rows: [
+                        {
+                            columns: [
+                                {elementId: 'domain', view: "FormInputView", viewConfig: {path: "domain", dataBindValue: "domain", class: "span6", view: "FormInputView"}},
+                                {elementId: 'partition', view: "FormInputView", viewConfig: {path: "parameters.partition", dataBindValue: "parameters().partition", class: "span6"}}
+                            ]
+                        },
+                        {
+                            columns: [
+                                {elementId: 'ipmi_username', view: "FormInputView", viewConfig: {path: 'ipmi_username', dataBindValue: 'ipmi_username', class: "span6"}},
+                                {elementId: 'ipmi_password', view: "FormInputView", viewConfig: {path: 'ipmi_password',  type: 'password', dataBindValue: 'ipmi_password', class: "span6"}}
+                            ]
+                        }
+                    ]
+                }
+            },
+
+            {
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_CONTRAIL_CONTROLLER]),
+                title: smwl.TITLE_CONTRAIL_CONTROLLER,
                 view: "SectionView",
                 viewConfig: {
                     rows: [
                         {
                             columns: [
                                 {
-                                    elementId: 'cluster_id',
+                                    elementId: 'package_image_id',
                                     view: "FormDropdownView",
-                                    viewConfig: {path: 'cluster_id', dataBindValue: 'cluster_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_CLUSTER, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectUrl(smwc.CLUSTER_PREFIX_ID, smwc.CLUSTER_PREFIX_ID)}}}
+                                    viewConfig: {path: 'package_image_id', dataBindValue: 'package_image_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInContrailControllerPackages')}}}
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                elementId: cowu.formatElementId([prefixId, smwl.TITLE_CONTRAIL_STORAGE]),
+                title: smwl.TITLE_CONTRAIL_STORAGE,
+                view: "SectionView",
+                viewConfig: {
+                    rows: [
+                        {
+                            columns: [
+                                {
+                                    elementId: 'storage_repo_id',
+                                    view: "FormDropdownView",
+                                    viewConfig: {path: 'parameters.storage_repo_id', dataBindValue: 'parameters().storage_repo_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInContrailStoragePackages')}}}
                                 },
-                                {elementId: 'email', view: "FormInputView", viewConfig: {path: 'email', dataBindValue: 'email', class: "span6"}}
+                                {
+                                    elementId: 'live_migration',
+                                    view: "FormDropdownView",
+                                    viewConfig: {path: 'parameters.live_migration', dataBindValue: 'parameters().live_migration', class: "span6", elementConfig: {dataTextField: "text", dataValueField: "id", data: smwc.STATES}}},
+                            ]
+                        },
+                        {
+                            columns: [
+                                {
+                                    elementId: 'live_migration_nfs_vm_host',
+                                    view: "FormInputView",
+                                    viewConfig: {path: 'parameters.live_migration_nfs_vm_host', dataBindValue: 'parameters().live_migration_nfs_vm_host', class: "span6"}
+                                },
+                                {elementId: 'live_migration_storage_scope', view: "FormDropdownView", viewConfig: {path: 'parameters.live_migration_storage_scope', dataBindValue: 'parameters().live_migration_storage_scope', class: "span6", elementConfig: {placeholder: smwl.TITLE_SELECT, dataTextField: "text", dataValueField: "id", data: smwc.STORAGE_SCOPE}}},
+
                             ]
                         }
                     ]
@@ -605,46 +816,26 @@ define([
                         {
                             columns: [
                                 {
+                                    elementId: 'cluster_id',
+                                    view: "FormDropdownView",
+                                    viewConfig: {path: 'cluster_id', dataBindValue: 'cluster_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_CLUSTER, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectUrl(smwc.CLUSTER_PREFIX_ID, smwc.CLUSTER_PREFIX_ID)}}}
+                                },
+                                {elementId: 'email', view: "FormInputView", viewConfig: {path: 'email', dataBindValue: 'email', class: "span6"}}
+                            ]
+                        },
+                        {
+                            columns: [
+                                {
                                     elementId: 'base_image_id',
                                     view: "FormDropdownView",
                                     viewConfig: {path: 'base_image_id', dataBindValue: 'base_image_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_IMAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInImages')}}}
-                                },
-                                {
-                                    elementId: 'package_image_id',
-                                    view: "FormDropdownView",
-                                    viewConfig: {path: 'package_image_id', dataBindValue: 'package_image_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInPackages')}}}
                                 }
                             ]
                         }
                     ]
                 }
             },
-            {
-                elementId: cowu.formatElementId([prefixId, smwl.TITLE_SYSTEM_MANAGEMENT]),
-                title: smwl.TITLE_SYSTEM_MANAGEMENT,
-                view: "SectionView",
-                viewConfig: {
-                    rows: [
-                        {
-                            columns: [
-                                {elementId: 'domain', view: "FormInputView", viewConfig: {path: "domain", dataBindValue: "domain", class: "span6", view: "FormInputView"}}
-                            ]
-                        },
-                        {
-                            columns: [
-                                {elementId: 'ipmi_username', view: "FormInputView", viewConfig: {path: 'ipmi_username', dataBindValue: 'ipmi_username', class: "span6"}},
-                                {elementId: 'ipmi_password', view: "FormInputView", viewConfig: {path: 'ipmi_password',  type: 'password', dataBindValue: 'ipmi_password', class: "span6"}}
-                            ]
-                        },
-                        {
-                            columns: [
-                                {elementId: 'gateway', view: "FormInputView", viewConfig: {path: "gateway", dataBindValue: "gateway", class: "span6"}},
-                                {elementId: 'subnet_mask', view: "FormInputView", viewConfig: {path: 'subnet_mask', dataBindValue: 'subnet_mask', class: "span6"}}
-                            ]
-                        }
-                    ]
-                }
-            }
+
         ]
     };
 

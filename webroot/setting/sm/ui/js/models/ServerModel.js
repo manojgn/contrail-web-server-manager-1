@@ -14,6 +14,29 @@ define([
         defaultConfig: smwmc.getServerModel(),
 
         formatModelConfig: function (modelConfig) {
+            if(modelConfig.contrail == null || modelConfig.contrail == '') {
+                modelConfig.contrail = {
+                    'control_data_interface': null
+                };
+            }
+
+            if(modelConfig.network == null || modelConfig.network == '') {
+                modelConfig.network = {
+                    'management_interface': null,
+                    'interfaces': []
+                };
+            }
+
+            if (contrail.checkIfExist(modelConfig.parameters.disks)) {
+                var storageDisks = [];
+
+                $.each(modelConfig.parameters.disks, function(diskKey, diskValue) {
+                    storageDisks.push({disk: diskValue});
+                })
+
+                modelConfig.parameters.disks = storageDisks;
+            }
+
             var interfaces = (modelConfig['network'] != null) ? (modelConfig['network']['interfaces']) : [],
                 interfaceModels = [], interfaceModel,
                 interfaceCollectionModel;
@@ -137,6 +160,7 @@ define([
                 interfaces = this.getServerInterfaces(serverAttrs);
                 serverAttrsEdited = cowu.getEditConfigObj(serverAttrs, locks);
                 serverAttrsEdited['network']['interfaces'] = interfaces;
+                delete serverAttrsEdited['interfaces'];
 
                 serversCreated.push(serverAttrsEdited);
 
@@ -378,7 +402,7 @@ define([
 
                 for (var i = 0; i < interfaces.length; i++) {
                     model = interfaces.at(i);
-                    type = model.attributes.type();
+                    type = contrail.checkIfExist(model.attributes.type()) ? model.attributes.type() : 'physical';
 
                     if (type == interfaceType) {
                         phyInterfaces.push(kbInterfaces[i]);
@@ -417,6 +441,45 @@ define([
                 return parentInterfaces;
             }, this);
         },
+        getManagementInterfaces: function() {
+            return Knockout.computed(function () {
+                var kbInterfaces = this.interfaces(),
+                    interfaces = this.model().attributes.interfaces,
+                    managementInterfaces = [], model, type,
+                    dhcp = null;
+
+                for (var i = 0; i < interfaces.length; i++) {
+                    model = interfaces.at(i);
+                    type = contrail.checkIfExist(model.attributes.type()) ? model.attributes.type() : 'physical';
+                    dhcp = model.attributes.dhcp();
+
+                    if (type == 'physical' && dhcp) {
+                        managementInterfaces.push(model.attributes.name());
+                    }
+                }
+                return managementInterfaces;
+            }, this);
+        },
+        getControlDataInterfaces: function() {
+            return Knockout.computed(function () {
+                var kbInterfaces = this.interfaces(),
+                    interfaces = this.model().attributes.interfaces,
+                    controlDataInterfaces = [], model, type,
+                    dhcp = null;
+
+                for (var i = 0; i < interfaces.length; i++) {
+                    model = interfaces.at(i);
+                    type = contrail.checkIfExist(model.attributes.type()) ? model.attributes.type() : 'physical';
+                    dhcp = model.attributes.dhcp();
+
+                    if (type != 'bond') {
+                        controlDataInterfaces.push(model.attributes.name());
+                    }
+                }
+                return controlDataInterfaces;
+            }, this);
+        },
+
         validations: {
             reimageValidation: {
                 'base_image_id': {
@@ -439,10 +502,10 @@ define([
                     required: true,
                     msg: smwm.getRequiredMessage('management_interface')
                 },
-                'contrail.control_data_interface': {
-                    required: true,
-                    msg: smwm.getRequiredMessage('control_data_interface')
-                },
+                //'contrail.control_data_interface': {
+                //    required: true,
+                //    msg: smwm.getRequiredMessage('control_data_interface')
+                //},
                 'ipmi_address': {
                     required: true,
                     pattern: cowc.PATTERN_IP_ADDRESS,
