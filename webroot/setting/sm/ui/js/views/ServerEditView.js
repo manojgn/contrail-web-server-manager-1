@@ -516,72 +516,31 @@ define([
                                     elementId: 'storage_repo_id',
                                     view: "FormDropdownView",
                                     viewConfig: {path: 'parameters.storage_repo_id', dataBindValue: 'parameters().storage_repo_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInContrailStoragePackages')}}}
-                                },
-                                {
-                                    elementId: 'live_migration',
-                                    view: "FormDropdownView",
-                                    viewConfig: {path: 'parameters.live_migration', dataBindValue: 'parameters().live_migration', class: "span6", elementConfig: {dataTextField: "text", dataValueField: "id", data: smwc.STATES}}},
+                                }
                             ]
                         },
                         {
                             columns: [
                                 {
-                                    elementId: 'live_migration_nfs_vm_host',
-                                    view: "FormInputView",
-                                    viewConfig: {path: 'parameters.live_migration_nfs_vm_host', dataBindValue: 'parameters().live_migration_nfs_vm_host', class: "span6"}
-                                },
-                                {
-                                    elementId: 'live_migration_storage_scope',
-                                    view: "FormDropdownView",
-                                    viewConfig: {path: 'parameters.live_migration_storage_scope', dataBindValue: 'parameters().live_migration_storage_scope', class: "span6", elementConfig: {placeholder: smwl.TITLE_SELECT, dataTextField: "text", dataValueField: "id", data: smwc.STORAGE_SCOPE}}},
-
+                                    elementId: 'disks',
+                                    view: "FormEditableGridView",
+                                    viewConfig: {
+                                        path: "disks",
+                                        validation: '',
+                                        collection: "getStorageDisks()",
+                                        columns: [
+                                            {elementId: 'disk', name: 'Storage Disks', view: "GridInputView", class: "", width: 800, viewConfig: {path: "disk", dataBindValue: "disk()"}}
+                                        ],
+                                        rowActions: [
+                                            {onClick: "function() { $root.deleteDisk($data, this); }", iconClass: 'icon-minus'}
+                                        ],
+                                        gridActions: [
+                                            {onClick: "function() { addDisk(); }", buttonTitle: "Add"}
+                                        ]
+                                    }
+                                }
                             ]
-                        },
-                        //{ Disks Grid
-                        //    columns: [
-                        //        {
-                        //            elementId: 'server-disks-grid',
-                        //            view: "FormDynamicGridView",
-                        //            viewConfig: {
-                        //                path: 'parameters.disks',
-                        //                class: "span12",
-                        //                modelAttributePath: 'parameters.disks',
-                        //                elementConfig: {
-                        //                    options: {
-                        //                        uniqueColumn: 'disk',
-                        //                    },
-                        //                    columns: [
-                        //                        {
-                        //                            id: "disk", name: "Storage Disks", field: "disk", width: 720,
-                        //                            editor: ContrailGrid.Editors.Text,
-                        //                            formatter: ContrailGrid.Formatters.Text,
-                        //                            validator: function (value) {
-                        //                                var valid = true,
-                        //                                    disks = $('#server-disks-grid').data('contrailDynamicgrid')._grid.getData();
-                        //
-                        //                                $.each(disks, function(diskKey, diskValue) {
-                        //                                    if (diskValue.disk == value) {
-                        //                                        valid = false;
-                        //                                        return
-                        //                                    }
-                        //                                });
-                        //
-                        //                                return {
-                        //                                    valid: valid,
-                        //                                    message: (!valid) ? 'Duplicate Disk' : null
-                        //                                }
-                        //
-                        //                            },
-                        //                            elementConfig: {
-                        //                                placeholder: 'Disk Location'
-                        //                            }
-                        //                        },
-                        //                    ]
-                        //                }
-                        //            }
-                        //        }
-                        //    ]
-                        //}
+                        }
                     ]
                 }
             },
@@ -652,82 +611,27 @@ define([
                                     }
                                 }
                             ]
-                        }
-                    ]
-                }
-            },
-
-
-            /*
-            {
-                elementId: cowu.formatElementId([prefixId, smwl.TITLE_ROUTE_CONFIGRATIONS]),
-                title: smwl.TITLE_ROUTE_CONFIGRATIONS,
-                view: "SectionView",
-                viewConfig: {
-                    rows: [
+                        },
                         {
                             columns: [
                                 {
-                                    elementId: 'server-routes-grid',
-                                    view: "FormDynamicGridView",
+                                    elementId: 'kernel_upgrade',
+                                    view: 'FormDropdownView',
                                     viewConfig: {
-                                        path: 'id',
-                                        class: "span12",
-                                        modelAttributePath: 'routes',
-                                        elementConfig: {
-                                            options: {
-                                                uniqueColumn: 'network'
-                                            },
-                                            columns: [
-                                                {
-                                                    id: "network", name: "IP Address/Mask", field: "network", width: 310,
-                                                    editor: ContrailGrid.Editors.Text,
-                                                    formatter: ContrailGrid.Formatters.Text,
-                                                    validator: function (value) {
-                                                        var pattern = new RegExp(smwc.PATTERN_SUBNET_MASK),
-                                                            valid = pattern.test(value);
-
-                                                        return {
-                                                            valid: valid,
-                                                            message: (!valid) ? smwm.getInvalidErrorMessage('subnet_mask') : null
-                                                        }
-
-                                                    },
-                                                    elementConfig: {
-                                                        placeholder: 'IP Address/Mask'
-                                                    }
-                                                },
-                                                {
-                                                    id: "gateway", name: "Gateway", field: "gateway", width: 280,
-                                                    editor: ContrailGrid.Editors.Text,
-                                                    formatter: ContrailGrid.Formatters.Text,
-                                                    validator: function (value) {
-                                                        var pattern = new RegExp(smwc.PATTERN_IP_ADDRESS),
-                                                            valid = pattern.test(value);
-
-                                                        return {
-                                                            valid: valid,
-                                                            message: (!valid) ? smwm.getInvalidErrorMessage('subnet_mask') : null
-                                                        }
-
-                                                    },
-                                                    elementConfig: {
-                                                        placeholder: 'Gateway'
-                                                    }
-                                                }
-                                            ]
-                                        }
+                                        path: 'parameters.kernel_upgrade',
+                                        dataBindValue: 'parameters().kernel_upgrade',
+                                        class: "span6",
+                                        elementConfig: {dataTextField: "text", dataValueField: "id", data: smwc.STATES_YES_NO}
                                     }
-                                }
+                                },
+                                {elementId: 'kernel_version', view: "FormInputView", viewConfig: {path: 'parameters.kernel_version', dataBindValue: 'parameters().kernel_version', class: "span6"}}
                             ]
                         }
                     ]
                 }
-            }
-            */
+            },
         ]
         };
-
     };
 
     var configureServersViewConfig = {
@@ -786,22 +690,7 @@ define([
                                     elementId: 'storage_repo_id',
                                     view: "FormDropdownView",
                                     viewConfig: {path: 'parameters.storage_repo_id', dataBindValue: 'parameters().storage_repo_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_PACKAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInContrailStoragePackages')}}}
-                                },
-                                {
-                                    elementId: 'live_migration',
-                                    view: "FormDropdownView",
-                                    viewConfig: {path: 'parameters.live_migration', dataBindValue: 'parameters().live_migration', class: "span6", elementConfig: {dataTextField: "text", dataValueField: "id", data: smwc.STATES}}},
-                            ]
-                        },
-                        {
-                            columns: [
-                                {
-                                    elementId: 'live_migration_nfs_vm_host',
-                                    view: "FormInputView",
-                                    viewConfig: {path: 'parameters.live_migration_nfs_vm_host', dataBindValue: 'parameters().live_migration_nfs_vm_host', class: "span6"}
-                                },
-                                {elementId: 'live_migration_storage_scope', view: "FormDropdownView", viewConfig: {path: 'parameters.live_migration_storage_scope', dataBindValue: 'parameters().live_migration_storage_scope', class: "span6", elementConfig: {placeholder: smwl.TITLE_SELECT, dataTextField: "text", dataValueField: "id", data: smwc.STORAGE_SCOPE}}},
-
+                                }
                             ]
                         }
                     ]
@@ -830,6 +719,21 @@ define([
                                     view: "FormDropdownView",
                                     viewConfig: {path: 'base_image_id', dataBindValue: 'base_image_id', class: "span6", elementConfig: {placeholder: smwl.SELECT_IMAGE, dataTextField: "id", dataValueField: "id", dataSource: {type: 'remote', url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInImages')}}}
                                 }
+                            ]
+                        },
+                        {
+                            columns: [
+                                {
+                                    elementId: 'kernel_upgrade',
+                                    view: 'FormDropdownView',
+                                    viewConfig: {
+                                        path: 'parameters.kernel_upgrade',
+                                        dataBindValue: 'parameters().kernel_upgrade',
+                                        class: "span6",
+                                        elementConfig: {dataTextField: "text", dataValueField: "id", data: smwc.STATES_YES_NO}
+                                    }
+                                },
+                                {elementId: 'kernel_version', view: "FormInputView", viewConfig: {path: 'parameters.kernel_version', dataBindValue: 'parameters().kernel_version', class: "span6"}}
                             ]
                         }
                     ]

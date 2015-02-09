@@ -41,6 +41,12 @@ define([
 
         ];
 
+        this.STATES_YES_NO = [
+            {'id': 'yes', 'text': 'Yes'},
+            {'id': 'no', 'text': 'No'}
+
+        ];
+
         this.INTERFACE_TYPES = [
             {
                 text: 'physical',
