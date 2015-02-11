@@ -85,6 +85,16 @@ define([
                                 ],
                                 "subnet_uuid": subnetUUID
                             }
+                        ],
+                        "virtual_machine_interface_device_owner" : "",
+                        "security_group_refs" : [
+                            {
+                                "to" :[
+                                    domain,
+                                    project,
+                                    "default"
+                                ]
+                            }
                         ]
                     }
                 };
