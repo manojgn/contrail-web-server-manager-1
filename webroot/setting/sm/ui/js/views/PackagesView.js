@@ -20,43 +20,10 @@ define([
 
             this.$el.html(directoryTemplate({name: prefixId}));
 
-            var gridConfig = {
-                header: {
-                    title: {
-                        text: smwl.TITLE_PACKAGES
-                    },
-                    advanceControls: headerActionConfig
-                },
-                columnHeader: {
-                    columns: smwgc.PACKAGE_COLUMNS
-                },
-                body: {
-                    options: {
-                        actionCell: rowActionConfig,
-                        checkboxSelectable: {
-                            onNothingChecked: function(e){
-                                $('#btnDeleteRepos').addClass('disabled-link');
-                            },
-                            onSomethingChecked: function(e){
-                                $('#btnDeleteRepos').removeClass('disabled-link');
-                            }
-                        },
-                        detail: {
-                            template: $('#' + cowc.TMPL_2ROW_GROUP_DETAIL).html(),
-                            templateConfig: detailTemplateConfig
-                        }
-                    },
-                    dataSource: {
-                        remote: {
-                            ajaxConfig: {
-                                url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInPackages')
-                            }
-                        }
-                    }
-                }
-            };
-
             cowu.renderGrid(gridElId, gridConfig);
+        },
+        getGridConfig : function () {
+            return gridConfig;
         }
     });
 
@@ -100,6 +67,42 @@ define([
             }
         ]
     ];
+
+    var gridConfig = {
+        header: {
+            title: {
+                text: smwl.TITLE_PACKAGES
+            },
+            advanceControls: headerActionConfig
+        },
+        columnHeader: {
+            columns: smwgc.PACKAGE_COLUMNS
+        },
+        body: {
+            options: {
+                actionCell: rowActionConfig,
+                checkboxSelectable: {
+                    onNothingChecked: function(e){
+                        $('#btnDeleteRepos').addClass('disabled-link');
+                    },
+                    onSomethingChecked: function(e){
+                        $('#btnDeleteRepos').removeClass('disabled-link');
+                    }
+                },
+                detail: {
+                    template: $('#' + cowc.TMPL_2ROW_GROUP_DETAIL).html(),
+                    templateConfig: detailTemplateConfig
+                }
+            },
+            dataSource: {
+                remote: {
+                    ajaxConfig: {
+                        url: smwu.getObjectDetailUrl(smwc.IMAGE_PREFIX_ID, 'filterInPackages')
+                    }
+                }
+            }
+        }
+    };
 
     return PackagesView;
 });
