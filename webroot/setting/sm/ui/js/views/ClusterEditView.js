@@ -908,7 +908,7 @@ define([
                                 placeholder: smwl.SEARCH_ROLES
                             },
                             minWidth: 150,
-                            height: 200,
+                            height: 350,
                             selectedList: 2,
                             data: [
                                 {
