@@ -55,8 +55,7 @@ define([
                             }
                         },
                         detail: {
-                            template: $('#' + cowc.TMPL_2ROW_GROUP_DETAIL).html(),
-                            templateConfig: detailTemplateConfig
+                            template: cowu.generateDetailTemplate(detailTemplateConfig, 'server-manager')
                         },
                         sortable: {
                             defaultSortCols: {
@@ -88,9 +87,8 @@ define([
             ajaxConfig.cache = "true";
             ajaxConfig.url = smwu.getObjectDetailUrl(smwc.SERVER_PREFIX_ID) + "?id=" + serverId;
 
-            that.$el.html(serverTemplate({prefix: smwc.SERVER_PREFIX_ID, prefixId: serverId}));
-
             contrail.ajaxHandler(ajaxConfig, function () {}, function (response) {
+                that.$el.html(serverTemplate({prefix: smwc.SERVER_PREFIX_ID, prefixId: serverId}));
                 var actionConfigItem = null,
                     detailActionConfig = getDetailActionConfig(false),
                     gridConfig, ipmiElId;
@@ -314,44 +312,189 @@ define([
         return rowActionConfig;
     };
 
-    var detailTemplateConfig = [
-        [
-            {
-                title: smwl.TITLE_SYSTEM_MANAGEMENT,
-                keys: ['id', 'mac_address', 'host_name', 'domain', 'ip_address', 'ipmi_address', 'gateway', 'subnet_mask', 'static_ip', 'parameters.partition']
-            },
-            {
-                title: smwl.TITLE_CONTRAIL_CONTROLLER,
-                keys: ['package_image_id', 'contrail.control_data_interface']
-            },
-            {
-                title: smwl.TITLE_CONTRAIL_STORAGE,
-                keys: ['parameters.storage_repo_id', 'parameters.disks']
-            }
-        ],
-        [
-            {
-                title: smwl.TITLE_STATUS,
-                keys: ['status', 'last_update', 'state']
-            },
-            {
-                title: smwl.TITLE_ROLES,
-                keys: ['roles']
-            },
-            {
-                title: smwl.TITLE_TAGS,
-                keys: ['tag.datacenter', 'tag.floor', 'tag.hall', 'tag.rack', 'tag.user_tag']
-            },
-            //{
-            //    title: smwl.TITLE_INTERFACES,
-            //    keys: ['parameters.interface_name', 'intf_bond', 'intf_data', 'intf_control']
-            //},
-            {
-                title: smwl.TITLE_PROVISIONING,
-                keys: [ 'cluster_id', 'email', 'base_image_id', 'reimaged_id', 'provisioned_id', 'network.management_interface', 'parameters.kernel_upgrade', 'parameters.kernel_version']
-            }
-        ]
-    ];
+    var detailTemplateConfig = {
+        templateGenerator: 'SectionTemplateGenerator',
+        templateGeneratorConfig: {
+            columns: [
+                {
+                    class: 'span6',
+                    rows: [
+                        {
+                            templateGenerator: 'BlockListTemplateGenerator',
+                            title: smwl.TITLE_SYSTEM_MANAGEMENT,
+                            templateGeneratorConfig: [
+                                {
+                                    key: 'id',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'mac_address',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'host_name',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'domain',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'ip_address',
+                                    valueType: 'link'
+                                },
+                                {
+                                    key: 'ipmi_address',
+                                    valueType: 'link'
+                                },
+                                {
+                                    key: 'gateway',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'subnet_mask',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'static_ip',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'parameters.partition',
+                                    valueType: 'text'
+                                }
+                            ]
+                        },
+                        {
+                            templateGenerator: 'BlockListTemplateGenerator',
+                            title: smwl.TITLE_CONTRAIL_CONTROLLER,
+                            templateGeneratorConfig: [
+                                {
+                                    key: 'package_image_id',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'contrail.control_data_interface',
+                                    valueType: 'text'
+                                }
+                            ]
+                        },
+                        {
+                            templateGenerator: 'BlockListTemplateGenerator',
+                            title: smwl.TITLE_CONTRAIL_STORAGE,
+                            templateGeneratorConfig: [
+                                {
+                                    key: 'parameters.storage_repo_id',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'parameters.disks',
+                                    valueType: 'text'
+                                }
+                            ]
+                        },
+                    ]
+                },
+                {
+                    class: 'span6',
+                    rows: [
+                        {
+                            templateGenerator: 'BlockListTemplateGenerator',
+                            title: smwl.TITLE_STATUS,
+                            templateGeneratorConfig: [
+                                {
+                                    key: 'status',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'last_update',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'state',
+                                    valueType: 'text'
+                                },
+                            ]
+                        },
+                        {
+                            templateGenerator: 'BlockListTemplateGenerator',
+                            title: smwl.TITLE_ROLES,
+                            templateGeneratorConfig: [
+                                {
+                                    key: 'roles',
+                                    valueType: 'text'
+                                },
+                            ]
+                        },
+                        {
+                            templateGenerator: 'BlockListTemplateGenerator',
+                            title: smwl.TITLE_TAGS,
+                            templateGeneratorConfig: [
+                                {
+                                    key: 'tag.datacenter',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'tag.floor',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'tag.hall',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'tag.rack',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'tag.user_tag',
+                                    valueType: 'text'
+                                },
+                            ]
+                        },
+                        {
+                            templateGenerator: 'BlockListTemplateGenerator',
+                            title: smwl.TITLE_PROVISIONING,
+                            templateGeneratorConfig: [
+                                {
+                                    key: 'cluster_id',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'email',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'base_image_id',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'reimaged_id',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'provisioned_id',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'network.management_interface',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'parameters.kernel_upgrade',
+                                    valueType: 'text'
+                                },
+                                {
+                                    key: 'parameters.kernel_version',
+                                    valueType: 'text'
+                                },
+                            ]
+                        },
+                    ]
+                }
+            ]
+        }
+    };
 
     return ServersView;
 
