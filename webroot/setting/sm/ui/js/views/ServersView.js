@@ -313,7 +313,7 @@ define([
     };
 
     var detailTemplateConfig = {
-        templateGenerator: 'SectionTemplateGenerator',
+        templateGenerator: 'ColumnSectionTemplateGenerator',
         templateGeneratorConfig: {
             columns: [
                 {
