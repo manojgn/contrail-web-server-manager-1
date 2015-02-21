@@ -55,7 +55,7 @@ define([
                             }
                         },
                         detail: {
-                            template: cowu.generateDetailTemplate(detailTemplateConfig, 'server-manager')
+                            template: cowu.generateDetailTemplateHTML(detailTemplateConfig, 'server-manager')
                         },
                         sortable: {
                             defaultSortCols: {
