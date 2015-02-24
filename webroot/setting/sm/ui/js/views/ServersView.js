@@ -325,43 +325,55 @@ define([
                             templateGeneratorConfig: [
                                 {
                                     key: 'id',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'mac_address',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'host_name',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'domain',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'ip_address',
-                                    valueType: 'link'
+                                    templateGenerator: 'LinkGenerator',
+                                    templateGeneratorConfig: {
+                                        template: 'http://{{params.ip_address}}:8080',
+                                        params: {
+                                            ip_address: 'ip_address'
+                                        }
+                                    }
                                 },
                                 {
                                     key: 'ipmi_address',
-                                    valueType: 'link'
+                                    templateGenerator: 'LinkGenerator',
+                                    templateGeneratorConfig: {
+                                        template: 'http://{{params.ipmi_address}}',
+                                        params: {
+                                            ipmi_address: 'ipmi_address'
+                                        }
+                                    }
                                 },
                                 {
                                     key: 'gateway',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'subnet_mask',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'static_ip',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'parameters.partition',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 }
                             ]
                         },
@@ -371,11 +383,11 @@ define([
                             templateGeneratorConfig: [
                                 {
                                     key: 'package_image_id',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'contrail.control_data_interface',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 }
                             ]
                         },
@@ -385,11 +397,11 @@ define([
                             templateGeneratorConfig: [
                                 {
                                     key: 'parameters.storage_repo_id',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'parameters.disks',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 }
                             ]
                         },
@@ -404,15 +416,15 @@ define([
                             templateGeneratorConfig: [
                                 {
                                     key: 'status',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'last_update',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'state',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                             ]
                         },
@@ -422,7 +434,7 @@ define([
                             templateGeneratorConfig: [
                                 {
                                     key: 'roles',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                             ]
                         },
@@ -432,23 +444,23 @@ define([
                             templateGeneratorConfig: [
                                 {
                                     key: 'tag.datacenter',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'tag.floor',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'tag.hall',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'tag.rack',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'tag.user_tag',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                             ]
                         },
@@ -458,35 +470,35 @@ define([
                             templateGeneratorConfig: [
                                 {
                                     key: 'cluster_id',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'email',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'base_image_id',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'reimaged_id',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'provisioned_id',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'network.management_interface',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'parameters.kernel_upgrade',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                                 {
                                     key: 'parameters.kernel_version',
-                                    valueType: 'text'
+                                    templateGenerator: 'TextGenerator'
                                 },
                             ]
                         },
